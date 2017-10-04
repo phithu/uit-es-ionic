@@ -1,1 +1,14 @@
 @import '../../theme/_content.scss';
+@import '../../theme/_utilities.scss';
+@import '../../theme/variables.scss';
+
+.badge__danger {
+
+  padding: 13px 8px;
+  background: #fff;
+  color: color($colors, danger);
+  border: 2px solid color($colors, danger);
+  font-size: 10pt;
+  margin-top: 10px;
+  @include box-shadow(3px, 3px ,2px , #ad9999);
+}

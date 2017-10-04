@@ -1,0 +1,16 @@
+.block_center {
+  display: table;
+  margin: 0px auto;
+}
+.flex {
+  display: flex;
+}
+.flex_center {
+  justify-content: center;
+}
+@mixin box-shadow($right, $top, $size, $color) {
+  box-shadow: $right $top $size $color;
+}
+// @mixin box-shadow($right, $top, $size, $color) {
+//   box-shadow: $right $top $size $color;
+// }

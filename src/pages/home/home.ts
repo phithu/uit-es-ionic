@@ -1,22 +1,20 @@
-import { ProductService } from './../../providers/products-service/products.service';
-import { ListItemPage } from './../list-item';
 import {
   Component,
-  ViewChild
+  ViewChild,
+  AfterViewInit
 } from '@angular/core';
 import {
-  NavController,
   List
 } from 'ionic-angular';
 import 'rxjs';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators} from '@angular/forms';
 
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
+export class HomePage implements AfterViewInit  {
 
   public listProducts: any;
   public frm: FormGroup;
@@ -25,7 +23,6 @@ export class HomePage {
   }
   public validatorErrorMsg = {
     search: {
-      minlength: 'Mã số sinh viên không hợp lệ.',
       required: 'Vui lòng nhập mã số sinh viên.',
       pattern: 'Mã số sinh viên không hợp lệ.'
 
@@ -34,31 +31,27 @@ export class HomePage {
   public formConfig = {
     search: new FormControl('', [
       Validators.required,
-      Validators.minLength(8),
       Validators.pattern(/^\d*\.?\d+$/)
     ])
   }
   @ViewChild(List) public list: List;
 
-  // private frm: FormGroup;
-
   constructor() {
-    // this.frm = this.formBuilder.group({
-    //   title: ['', Validators.required],
-    //   description: [''],
-    // });
-    // this.frm = this.formBuilder.group(this.formConfig);
     this.frm = new FormGroup(this.formConfig);
-    
   }
   logForm() {
-    // console.log(this.todo.value)
+
   }
 
   public ionViewDidLoad() {
     this.frm.valueChanges.subscribe(() => this.onValueChanged());
     this.onValueChanged();
 
+  }
+  public ngAfterViewInit() {
+    let inputSearch = document.querySelector('.searchbar-input');
+    // set attribute maxlength = 8
+    inputSearch.setAttribute('maxlength', '8');
   }
 
   public onTap(item: any) {
@@ -84,15 +77,11 @@ export class HomePage {
     const form = self.frm;
     for (const field in self.formError) {
       if (self.formError.hasOwnProperty(field)) {
-        // clear previous error message (if any)
         self.formError[field] = '';
         const control = form.get(field);
         if (submited) {
           control.markAsDirty();
         }
-
-        // self.hasError = false;
-
         if (control && control.dirty && !control.valid) {
           const messages = self.validatorErrorMsg[field];
           for (const key in control.errors) {
