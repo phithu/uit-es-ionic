@@ -1,3 +1,4 @@
+import { ExamSchedulePageModule } from './../pages/exam-schedule/exam-schedule.module';
 import { ProductService } from './../providers/products-service/products.service';
 import { HttpModule } from '@angular/http';
 // Core Angular - Ionic
@@ -8,7 +9,6 @@ import { StatusBar } from '@ionic-native/status-bar';
 
 // Module
 import { BrowserModule } from '@angular/platform-browser';
-import { ListItemPageModule } from '../pages/list-item';
 import { HomePageModule } from '../pages/home';
 
 // Page
@@ -25,7 +25,7 @@ import { MyApp } from './app.component';
     BrowserModule,
     HttpModule,
     HomePageModule,
-    ListItemPageModule,
+    ExamSchedulePageModule,
     IonicModule.forRoot(MyApp, {
       preloadModules: true
     })

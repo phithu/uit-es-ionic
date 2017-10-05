@@ -1,109 +1,61 @@
-import { ProductService } from './../../providers/products-service/products.service';
-import { ListItemPage } from './../list-item';
+import { ExamSchedulePage } from './../exam-schedule/exam-schedule';
+import { NavController } from 'ionic-angular';
+import { FormBaseComponent } from './../../components/form-base/form-base';
 import {
   Component,
-  ViewChild
+  AfterViewInit,
+  OnInit
 } from '@angular/core';
-import {
-  NavController,
-  List
-} from 'ionic-angular';
 import 'rxjs';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage {
+export class HomePage extends FormBaseComponent implements OnInit, AfterViewInit {
 
   public listProducts: any;
   public frm: FormGroup;
-  public formError = {
+  public formErrors = {
     search: ''
   }
-  public validatorErrorMsg = {
+  public validationMessages = {
     search: {
-      minlength: 'Mã số sinh viên không hợp lệ.',
       required: 'Vui lòng nhập mã số sinh viên.',
       pattern: 'Mã số sinh viên không hợp lệ.'
 
     }
   }
-  public formConfig = {
+  public controlConfig = {
     search: new FormControl('', [
       Validators.required,
-      Validators.minLength(8),
       Validators.pattern(/^\d*\.?\d+$/)
     ])
   }
-  @ViewChild(List) public list: List;
-
-  // private frm: FormGroup;
-
-  constructor() {
-    // this.frm = this.formBuilder.group({
-    //   title: ['', Validators.required],
-    //   description: [''],
-    // });
-    // this.frm = this.formBuilder.group(this.formConfig);
-    this.frm = new FormGroup(this.formConfig);
-    
+  constructor(private _navCtrl: NavController) {
+    super();
   }
-  logForm() {
-    // console.log(this.todo.value)
+
+  public ngOnInit() {
+    super.ngOnInit();
   }
 
   public ionViewDidLoad() {
-    this.frm.valueChanges.subscribe(() => this.onValueChanged());
-    this.onValueChanged();
 
   }
-
-  public onTap(item: any) {
-    console.log(item);
+  public ngAfterViewInit() {
+    let inputSearch = document.querySelector('.searchbar-input');
+    // set attribute maxlength = 8
+    inputSearch.setAttribute('maxlength', '8');
   }
 
-  public onClick() {
-
-
-  }
-  public onInput(e: any) {
-    console.log("On input");
-  }
-
-  private onValueChanged(submited?: boolean) {
-
-    let self = this;
-
-    if (!self.frm) {
-      return;
-    }
-
-    const form = self.frm;
-    for (const field in self.formError) {
-      if (self.formError.hasOwnProperty(field)) {
-        // clear previous error message (if any)
-        self.formError[field] = '';
-        const control = form.get(field);
-        if (submited) {
-          control.markAsDirty();
-        }
-
-        // self.hasError = false;
-
-        if (control && control.dirty && !control.valid) {
-          const messages = self.validatorErrorMsg[field];
-          for (const key in control.errors) {
-            if (control.errors.hasOwnProperty(key)) {
-              self.formError[field] += messages[key] + ' ';
-              break;
-            }
-          }
-        }
-      }
+  public onInput(idStudent: string) {
+    if(idStudent.length === 8 && this.frm.valid) {
+      this._navCtrl.push(ExamSchedulePage, {
+        idStudent: idStudent
+      }, {duration: 250})
     }
   }
-
 }
