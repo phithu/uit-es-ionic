@@ -1,51 +1,48 @@
+import { ExamSchedulePage } from './../exam-schedule/exam-schedule';
+import { NavController } from 'ionic-angular';
+import { FormBaseComponent } from './../../components/form-base/form-base';
 import {
   Component,
-  ViewChild,
-  AfterViewInit
+  AfterViewInit,
+  OnInit
 } from '@angular/core';
-import {
-  List
-} from 'ionic-angular';
 import 'rxjs';
-import { FormGroup, FormControl, Validators} from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage implements AfterViewInit  {
+export class HomePage extends FormBaseComponent implements OnInit, AfterViewInit {
 
   public listProducts: any;
   public frm: FormGroup;
-  public formError = {
+  public formErrors = {
     search: ''
   }
-  public validatorErrorMsg = {
+  public validationMessages = {
     search: {
       required: 'Vui lòng nhập mã số sinh viên.',
       pattern: 'Mã số sinh viên không hợp lệ.'
 
     }
   }
-  public formConfig = {
+  public controlConfig = {
     search: new FormControl('', [
       Validators.required,
       Validators.pattern(/^\d*\.?\d+$/)
     ])
   }
-  @ViewChild(List) public list: List;
-
-  constructor() {
-    this.frm = new FormGroup(this.formConfig);
+  constructor(private _navCtrl: NavController) {
+    super();
   }
-  logForm() {
 
+  public ngOnInit() {
+    super.ngOnInit();
   }
 
   public ionViewDidLoad() {
-    this.frm.valueChanges.subscribe(() => this.onValueChanged());
-    this.onValueChanged();
 
   }
   public ngAfterViewInit() {
@@ -54,45 +51,11 @@ export class HomePage implements AfterViewInit  {
     inputSearch.setAttribute('maxlength', '8');
   }
 
-  public onTap(item: any) {
-    console.log(item);
-  }
-
-  public onClick() {
-
-
-  }
-  public onInput(e: any) {
-    console.log("On input");
-  }
-
-  private onValueChanged(submited?: boolean) {
-
-    let self = this;
-
-    if (!self.frm) {
-      return;
-    }
-
-    const form = self.frm;
-    for (const field in self.formError) {
-      if (self.formError.hasOwnProperty(field)) {
-        self.formError[field] = '';
-        const control = form.get(field);
-        if (submited) {
-          control.markAsDirty();
-        }
-        if (control && control.dirty && !control.valid) {
-          const messages = self.validatorErrorMsg[field];
-          for (const key in control.errors) {
-            if (control.errors.hasOwnProperty(key)) {
-              self.formError[field] += messages[key] + ' ';
-              break;
-            }
-          }
-        }
-      }
+  public onInput(idStudent: string) {
+    if(idStudent.length === 8 && this.frm.valid) {
+      this._navCtrl.push(ExamSchedulePage, {
+        idStudent: idStudent
+      }, {duration: 250})
     }
   }
-
 }

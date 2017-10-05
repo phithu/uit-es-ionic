@@ -2,7 +2,7 @@
   <ion-navbar color='primary'>
     <ion-title text-center>
       <div class="flex flex_center">
-        <i class="material-icons">date_range</i> <span>UIT Exam Shedule</span>
+        <i class="material-icons">event_note</i> <span class="mar_left_7">UIT ES Creator</span>
       </div>
     </ion-title>
   </ion-navbar>
@@ -10,10 +10,57 @@
 
 <ion-content padding>
   <form [formGroup]="frm">
-    <ion-searchbar maxlength="10" type="text" maxlen formControlName="search" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event)">
+    <ion-searchbar type="text" maxlen formControlName="search" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event.target.value)">
     </ion-searchbar>
-    <ion-badge class="block_center badge__danger" *ngIf="formError.search">
-      {{formError.search}}
+    <ion-badge class="block_center badge__danger" *ngIf="formErrors.search">
+      {{formErrors.search}}
     </ion-badge>
   </form>
+  <ion-card class="card_home">
+    <ion-card-header>
+      Hoạt động gần đây
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col col-lg-3 col-md-4 col-sm-6>
+            <button class="block_center" ion-button>14520909</button>
+          </ion-col>
+          <ion-col col-lg-3 col-md-4 col-sm-6>
+            <button class="block_center" ion-button>14521021</button>
+          </ion-col>
+          <ion-col col-lg-3 col-md-4 col-sm-6>
+            <button class="block_center" ion-button>14521021</button>
+          </ion-col>
+          <ion-col col-lg-3 col-md-4 col-sm-6>
+            <button class="block_center" ion-button>14521021</button>
+          </ion-col>
+          <ion-col col-lg-3 col-md-4 col-sm-6>
+            <button class="block_center" ion-button>14521021</button>
+          </ion-col>
+          <ion-col col-lg-3 col-md-4 col-sm-6>
+            <button class="block_center" ion-button>14521021</button>
+          </ion-col>
+          <ion-col col-lg-3 col-md-4 col-sm-6>
+            <button class="block_center" ion-button>14521021</button>
+          </ion-col>
+          <ion-col col-lg-3 col-md-4 col-sm-6>
+            <button class="block_center" ion-button>14521021</button>
+          </ion-col>
+          <ion-col col-lg-3 col-md-4 col-sm-6>
+            <button class="block_center" ion-button>14521021</button>
+          </ion-col>
+          <ion-col col-lg-3 col-md-4 col-sm-6>
+            <button class="block_center" ion-button>14521021</button>
+          </ion-col>
+          <ion-col col-lg-3 col-md-4 col-sm-6>
+            <button class="block_center" ion-button>14521021</button>
+          </ion-col>
+          <ion-col col-lg-3 col-md-4 col-sm-6>
+            <button class="block_center" ion-button>14521021</button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>      
+    </ion-card-content>
+  </ion-card>
 </ion-content>
