@@ -3,6 +3,7 @@ import { HomePage } from './home';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicPageModule } from 'ionic-angular';
+import { Keyboard } from '@ionic-native/keyboard';
 
 @NgModule({
   declarations: [
@@ -16,6 +17,9 @@ import { IonicPageModule } from 'ionic-angular';
   ],
   entryComponents: [
     HomePage
+  ],
+  providers: [
+    Keyboard,
   ]
 })
 export class HomePageModule {

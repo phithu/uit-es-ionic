@@ -13,6 +13,7 @@ import { HomePageModule } from '../pages/home';
 
 // Page
 import { MyApp } from './app.component';
+import { Keyboard } from '@ionic-native/keyboard';
 
 //Service
 
@@ -27,7 +28,10 @@ import { MyApp } from './app.component';
     HomePageModule,
     ExamSchedulePageModule,
     IonicModule.forRoot(MyApp, {
-      preloadModules: true
+      preloadModules: true,
+      scrollPadding: false,
+      scrollAssist: true,
+      autoFocusAssist: false
     })
   ],
   bootstrap: [IonicApp],
@@ -37,6 +41,7 @@ import { MyApp } from './app.component';
   providers: [
     ProductService,
     StatusBar,
+    Keyboard,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]

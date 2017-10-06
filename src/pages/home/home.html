@@ -7,60 +7,14 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-
-<ion-content padding>
-  <form [formGroup]="frm">
-    <ion-searchbar type="text" maxlen formControlName="search" [showCancelButton]="shouldShowCancel" (ionInput)="onInput($event.target.value)">
+<ion-content scroll="true">
+  <form [formGroup]="frm" (ngSubmit)="formSubmit(frm.value)">
+    <ion-searchbar type="text" formControlName="search" [showCancelButton]="shouldShowCancel">
     </ion-searchbar>
+    <button type="button" ion-button (click)="formSubmit(frm.value)">Submit</button>
     <ion-badge class="block_center badge__danger" *ngIf="formErrors.search">
       {{formErrors.search}}
     </ion-badge>
   </form>
-  <ion-card class="card_home">
-    <ion-card-header>
-      Hoạt động gần đây
-    </ion-card-header>
-    <ion-card-content>
-      <ion-grid>
-        <ion-row>
-          <ion-col col-lg-3 col-md-4 col-sm-6>
-            <button class="block_center" ion-button>14520909</button>
-          </ion-col>
-          <ion-col col-lg-3 col-md-4 col-sm-6>
-            <button class="block_center" ion-button>14521021</button>
-          </ion-col>
-          <ion-col col-lg-3 col-md-4 col-sm-6>
-            <button class="block_center" ion-button>14521021</button>
-          </ion-col>
-          <ion-col col-lg-3 col-md-4 col-sm-6>
-            <button class="block_center" ion-button>14521021</button>
-          </ion-col>
-          <ion-col col-lg-3 col-md-4 col-sm-6>
-            <button class="block_center" ion-button>14521021</button>
-          </ion-col>
-          <ion-col col-lg-3 col-md-4 col-sm-6>
-            <button class="block_center" ion-button>14521021</button>
-          </ion-col>
-          <ion-col col-lg-3 col-md-4 col-sm-6>
-            <button class="block_center" ion-button>14521021</button>
-          </ion-col>
-          <ion-col col-lg-3 col-md-4 col-sm-6>
-            <button class="block_center" ion-button>14521021</button>
-          </ion-col>
-          <ion-col col-lg-3 col-md-4 col-sm-6>
-            <button class="block_center" ion-button>14521021</button>
-          </ion-col>
-          <ion-col col-lg-3 col-md-4 col-sm-6>
-            <button class="block_center" ion-button>14521021</button>
-          </ion-col>
-          <ion-col col-lg-3 col-md-4 col-sm-6>
-            <button class="block_center" ion-button>14521021</button>
-          </ion-col>
-          <ion-col col-lg-3 col-md-4 col-sm-6>
-            <button class="block_center" ion-button>14521021</button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>      
-    </ion-card-content>
-  </ion-card>
+  <p *ngIf="submited">Haha</p>
 </ion-content>

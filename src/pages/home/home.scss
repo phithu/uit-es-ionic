@@ -12,11 +12,11 @@
   margin-top: 10px;
   @include box-shadow(3px, 3px ,2px , #ad9999);
 }
-.card_home {
-  position: fixed;
-  top: 200px;
+// .card_home {
+//   position: fixed;
+//   top: 200px;
 
-}
+// }
 .card-md {
   left: 15px;
   width: calc(100% - 50px);
@@ -24,4 +24,7 @@
 .card-ios {
   left: 4px;
   width: calc(100% - 33px);
+}
+.scroll-content {
+  padding-bottom:0!important;
 }

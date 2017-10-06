@@ -1,30 +1,30 @@
 import { ExamSchedulePage } from './../exam-schedule/exam-schedule';
-import { NavController } from 'ionic-angular';
+import { NavController} from 'ionic-angular';
 import { FormBaseComponent } from './../../components/form-base/form-base';
 import {
   Component,
-  AfterViewInit,
-  OnInit
+  OnInit,
 } from '@angular/core';
 import 'rxjs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { Keyboard } from '@ionic-native/keyboard';
 
 
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
-export class HomePage extends FormBaseComponent implements OnInit, AfterViewInit {
+export class HomePage extends FormBaseComponent implements OnInit {
 
-  public listProducts: any;
   public frm: FormGroup;
+  submited: boolean = false;
   public formErrors = {
     search: ''
   }
   public validationMessages = {
     search: {
-      required: 'Vui lòng nhập mã số sinh viên.',
-      pattern: 'Mã số sinh viên không hợp lệ.'
+      required: 'Student ID is required.',
+      pattern: 'Student ID is invalid.'
 
     }
   }
@@ -34,28 +34,28 @@ export class HomePage extends FormBaseComponent implements OnInit, AfterViewInit
       Validators.pattern(/^\d*\.?\d+$/)
     ])
   }
-  constructor(private _navCtrl: NavController) {
+  constructor(
+    private _navCtrl: NavController) {
     super();
   }
 
+
   public ngOnInit() {
     super.ngOnInit();
+    // this.frm.get('search').valueChanges.subscribe((idStudent: string) => {
+    //   if(idStudent.length === 8) {
+    //     this.openNewPage(idStudent);
+    //   }
+    // })
+   
   }
-
-  public ionViewDidLoad() {
-
+  public openNewPage(value: any) {
+    this._navCtrl.push(ExamSchedulePage, {
+      idStudent: value.search
+    }, { duration: 250 })
   }
-  public ngAfterViewInit() {
-    let inputSearch = document.querySelector('.searchbar-input');
-    // set attribute maxlength = 8
-    inputSearch.setAttribute('maxlength', '8');
-  }
-
-  public onInput(idStudent: string) {
-    if(idStudent.length === 8 && this.frm.valid) {
-      this._navCtrl.push(ExamSchedulePage, {
-        idStudent: idStudent
-      }, {duration: 250})
-    }
+  formSubmit(value: any) {
+    this.openNewPage('hahah')
+    // this.submited = true
   }
 }
