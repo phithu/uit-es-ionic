@@ -9,7 +9,8 @@
         "build": "ionic-app-scripts build",
         "lint": "ionic-app-scripts lint",
         "ionic:build": "ionic-app-scripts build",
-        "ionic:serve": "ionic-app-scripts serve"
+        "ionic:serve": "ionic-app-scripts serve",
+        "device": "ionic cordova run android --target=832e51554a474654 --livereload"
     },
     "dependencies": {
         "@angular/common": "4.4.3",

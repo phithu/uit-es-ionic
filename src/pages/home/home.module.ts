@@ -3,7 +3,8 @@ import { HomePage } from './home';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicPageModule } from 'ionic-angular';
-import { Keyboard } from '@ionic-native/keyboard';
+import { MaxlengthDirectiveModule } from '../../directives/max-length';
+
 
 @NgModule({
   declarations: [
@@ -13,13 +14,11 @@ import { Keyboard } from '@ionic-native/keyboard';
     FormsModule,
     ReactiveFormsModule,
     FormBaseModule,
+    MaxlengthDirectiveModule,
     IonicPageModule.forChild(HomePage),
   ],
   entryComponents: [
     HomePage
-  ],
-  providers: [
-    Keyboard,
   ]
 })
 export class HomePageModule {

@@ -1,0 +1,11 @@
+@import './variables.scss';
+@import './_utilities.scss';
+.badge__danger {
+  padding: 8px;
+  background: #fff;
+  color: color($colors, danger);
+  border: 2px solid color($colors, danger);
+  font-size: 10pt;
+  margin-top: 10px;
+  @include box-shadow(3px, 3px ,4px , #ad9999);
+}

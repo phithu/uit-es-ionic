@@ -7,7 +7,6 @@ import {
 } from '@angular/core';
 import 'rxjs';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { Keyboard } from '@ionic-native/keyboard';
 
 
 @Component({
@@ -17,21 +16,22 @@ import { Keyboard } from '@ionic-native/keyboard';
 export class HomePage extends FormBaseComponent implements OnInit {
 
   public frm: FormGroup;
-  submited: boolean = false;
   public formErrors = {
     search: ''
   }
   public validationMessages = {
     search: {
-      required: 'Student ID is required.',
-      pattern: 'Student ID is invalid.'
+      required: 'Vui lòng nhập mã số sinh viên.',
+      pattern: 'Mã số sinh viên không hợp lệ.',
+      maxlength: 'Mã số sinh viên không hợp lệ'
 
     }
   }
   public controlConfig = {
     search: new FormControl('', [
       Validators.required,
-      Validators.pattern(/^\d*\.?\d+$/)
+      Validators.pattern(/^\d*\.?\d+$/),
+      Validators.maxLength(8)
     ])
   }
   constructor(
@@ -42,20 +42,18 @@ export class HomePage extends FormBaseComponent implements OnInit {
 
   public ngOnInit() {
     super.ngOnInit();
-    // this.frm.get('search').valueChanges.subscribe((idStudent: string) => {
-    //   if(idStudent.length === 8) {
-    //     this.openNewPage(idStudent);
-    //   }
-    // })
+    this.frm.get('search').valueChanges
+    .debounceTime(250)
+    .subscribe((idStudent: string) => {
+      if(idStudent.length === 8 && this.frm.valid) {
+        this.openNewPage(idStudent);
+      }
+    })
    
   }
   public openNewPage(value: any) {
     this._navCtrl.push(ExamSchedulePage, {
       idStudent: value.search
     }, { duration: 250 })
-  }
-  formSubmit(value: any) {
-    this.openNewPage('hahah')
-    // this.submited = true
   }
 }
