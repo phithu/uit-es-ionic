@@ -11,6 +11,12 @@
 .mar_left_7 {
   margin-left: 7px;
 }
+.pad_10_15 {
+  padding: 10px 15px;
+}
+.mar_10_0 {
+  margin: 10px inherit;
+}
 @mixin box-shadow($right, $top, $size, $color) {
   box-shadow: $right $top $size $color;
 }

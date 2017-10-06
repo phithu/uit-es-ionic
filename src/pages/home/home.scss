@@ -1,25 +1,34 @@
 @import '../../theme/_content.scss';
 @import '../../theme/_utilities.scss';
 @import '../../theme/variables.scss';
+@import '../../theme/_badge.scss';
 
-.badge__danger {
-
-  padding: 13px 8px;
-  background: #fff;
-  color: color($colors, danger);
-  border: 2px solid color($colors, danger);
-  font-size: 10pt;
-  margin-top: 10px;
-  @include box-shadow(3px, 3px ,2px , #ad9999);
+.wrapper {
+  width: 95%;
+  margin: 0px 2.5%;
+  position: fixed;
+  top: 55px;
+}
+form {
+  position: absolute;
+  top:10px;
+  z-index: 2;
+  width: 100%;
 }
 .card_home {
-  position: fixed;
-  top: 200px;
+  position: absolute;
+  transition: top 0.3s ease-out;
+  top: 90px;
+  left: 8px;
+  margin: 0px;
+  width: calc(100% - 16px);
 
 }
+.card_down {
+  top:135px;
+}
 .card-md {
-  left: 15px;
-  width: calc(100% - 50px);
+
 }
 .card-ios {
   left: 4px;
