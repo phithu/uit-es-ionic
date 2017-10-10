@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs';
 import { Observable } from 'rxjs/Observable';
-const linkAPI = 'http://5949f15d6d49df0011102d18.mockapi.io/test/Product';
+const linkAPI = 'https://exam-schedule-api.herokuapp.com';
 /*
   Generated class for the MainServiceProvider provider.
 
@@ -10,11 +10,11 @@ const linkAPI = 'http://5949f15d6d49df0011102d18.mockapi.io/test/Product';
   and Angular DI.
 */
 @Injectable()
-export class ProductService {
+export class ExamSheduleService {
 
   constructor(private http: Http) {}
-  public getProducts(): Observable<any> {
-    return this.http.get(linkAPI)
+  public getLogs(): Observable<any> {
+    return this.http.get(`${linkAPI}/logs`)
     .map((response) => response.json())
     .catch(this.handlerError)
   }

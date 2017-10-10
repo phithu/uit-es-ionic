@@ -1,6 +1,7 @@
+import { ExamSheduleService } from '../../providers/exam-schedule';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { ExamScheduleModel } from '../../model/exam-schedule';
 /**
  * Generated class for the ExamSchedulePage page.
  *
@@ -17,11 +18,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ExamSchedulePage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public idStudent: string;
+  public examSchedule: ExamScheduleModel;
+
+  constructor(private _navParams: NavParams, 
+    private _examSheduleService: ExamSheduleService) {
   }
 
-  ionViewDidLoad() {
-    console.log('ionViewDidLoad ExamSchedulePage');
+  public ionViewDidLoad() {
+    this.idStudent = this._navParams.get('idStudent');
   }
 
 }

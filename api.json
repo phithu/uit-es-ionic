@@ -1,0 +1,36 @@
+[
+    {
+        "idStudent": 14520909,
+        "nameStudent": "Nguyen Van A",
+        "notes": "",
+        "examSchedule": [
+            {
+                "class": "Class test 11",
+                "idClass": "ID test 1",
+                "ordernumber": 2,
+                "room": "Room test 1",
+                "shirt": 1,
+                "date": "21/12/2017",
+                "hours": "7h:30"
+            },
+            {
+                "class": "Class test 22",
+                "idClass": "ID test 2",
+                "ordernumber": 2,
+                "room": "Room test 2",
+                "shirt": 3,
+                "date": "11/12/2017",
+                "hours": "9h:30"
+            },
+            {
+                "class": "Class test 33",
+                "idClass": "ID test 32",
+                "ordernumber": 12,
+                "room": "Room test 32",
+                "shirt": 3,
+                "date": "11/12/2017",
+                "hours": "9h:30"
+            }
+        ]
+    }
+]

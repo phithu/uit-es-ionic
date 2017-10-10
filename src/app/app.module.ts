@@ -1,5 +1,5 @@
+import { ExamSheduleService } from '../providers/exam-schedule';
 import { ExamSchedulePageModule } from './../pages/exam-schedule/exam-schedule.module';
-import { ProductService } from './../providers/products-service/products.service';
 import { HttpModule } from '@angular/http';
 // Core Angular - Ionic
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -35,7 +35,7 @@ import { MyApp } from './app.component';
     MyApp
   ],
   providers: [
-    ProductService,
+    ExamSheduleService,
     StatusBar,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler }

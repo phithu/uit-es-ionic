@@ -2,7 +2,7 @@
   <ion-navbar color='primary'>
     <ion-title text-center>
       <div class="flex flex_center">
-        <i class="material-icons">event_note</i> <span class="mar_left_7">UIT ES Creator</span>
+        <i class="material-icons">event_note</i> <span class="mar_left_7">UIT Exam Schedule</span>
       </div>
     </ion-title>
   </ion-navbar>
@@ -10,55 +10,22 @@
 
 <ion-content>
   <div class="wrapper">
-    <form [formGroup]="frm">
-      <ion-searchbar [maxlength]="8" type="number" placeholder="Mã số sinh viên..." formControlName="search" [showCancelButton]="shouldShowCancel">
+    <form [formGroup]="frm" (ngSubmit)="openNewPage(frm.value.search)">
+      <ion-searchbar type="number" placeholder="Mã số sinh viên..." formControlName="search" [showCancelButton]="shouldShowCancel">
       </ion-searchbar>
       <ion-badge class="block_center badge__danger" *ngIf="formErrors.search">
         {{formErrors.search}}
       </ion-badge>
     </form>
-    <ion-card [ngClass]="{'card_down': formErrors.search}" class="card_home">
+    <ion-card *ngIf="listLogs" class="card_home" [ngClass]="{'card_down': formErrors.search}">
       <ion-card-header>
         Hoạt động gần đây
       </ion-card-header>
       <ion-card-content>
         <ion-grid>
           <ion-row>
-            <ion-col col-lg-3 col-md-4 col-sm-6>
-              <button class="block_center" ion-button>14520909</button>
-            </ion-col>
-            <ion-col col-lg-3 col-md-4 col-sm-6>
-              <button class="block_center" ion-button>14521021</button>
-            </ion-col>
-            <ion-col col-lg-3 col-md-4 col-sm-6>
-              <button class="block_center" ion-button>14521021</button>
-            </ion-col>
-            <ion-col col-lg-3 col-md-4 col-sm-6>
-              <button class="block_center" ion-button>14521021</button>
-            </ion-col>
-            <ion-col col-lg-3 col-md-4 col-sm-6>
-              <button class="block_center" ion-button>14521021</button>
-            </ion-col>
-            <ion-col col-lg-3 col-md-4 col-sm-6>
-              <button class="block_center" ion-button>14521021</button>
-            </ion-col>
-            <ion-col col-lg-3 col-md-4 col-sm-6>
-              <button class="block_center" ion-button>14521021</button>
-            </ion-col>
-            <ion-col col-lg-3 col-md-4 col-sm-6>
-              <button class="block_center" ion-button>14521021</button>
-            </ion-col>
-            <ion-col col-lg-3 col-md-4 col-sm-6>
-              <button class="block_center" ion-button>14521021</button>
-            </ion-col>
-            <ion-col col-lg-3 col-md-4 col-sm-6>
-              <button class="block_center" ion-button>14521021</button>
-            </ion-col>
-            <ion-col col-lg-3 col-md-4 col-sm-6>
-              <button class="block_center" ion-button>14521021</button>
-            </ion-col>
-            <ion-col col-lg-3 col-md-4 col-sm-6>
-              <button class="block_center" ion-button>14521021</button>
+            <ion-col *ngFor="let log of listLogs" col-12>
+                <log-item [log]="log"></log-item>
             </ion-col>
           </ion-row>
         </ion-grid>
