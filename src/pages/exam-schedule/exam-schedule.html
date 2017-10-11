@@ -6,15 +6,39 @@
 -->
 <ion-header>
   <ion-navbar color='primary'>
-    <ion-title text-center>
-      <div class="flex">
-        <i class="material-icons">event_note</i> <span>UIT ES Creator</span>
-      </div>
+    <ion-title *ngIf="examSchedule">
+      Lịch thi {{examSchedule.nameStudent}}
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 
 <ion-content padding>
-  <p *ngIf="idStudent">{{idStudent}}</p>
+  <!-- <ng-container *ngIf="examSchedule">
+  <pre>{{examSchedule | json}}</pre>
+</ng-container> -->
+  <ion-list *ngIf="examSchedule">
+    <ion-item-sliding *ngFor="let item of examSchedule.examSchedule">
+      <ion-item>
+        <h2 class="item__exam"><strong>Môn thi:</strong> {{item.class}}</h2>
+        <h2 class="item__exam"><strong>Mã lớp:</strong> {{item.idClass}}</h2>
+        <h2 class="item__exam"><strong>STT:</strong> {{item.orderNumber}}</h2>
+        <h2 class="item__exam"><strong>Ngày thi:</strong> {{item.date}}</h2>
+        <h2 class="item__exam"><strong>Ca thi:</strong> {{item.shirt}} - ({{item.hours}})</h2>
+        <h2 class="item__exam"><strong>Phòng thi:</strong> {{item.room}}</h2>
+      </ion-item>
+      <ion-item-options side="left">
+        <button ion-button color="danger">
+            <ion-icon ios="ios-alarm" md="md-alarm"></ion-icon>
+          Đặt lịch
+        </button>
+      </ion-item-options>
+      <ion-item-options side="right">
+        <button ion-button color="secondary">
+            <ion-icon ios="ios-people" md="md-people"></ion-icon>
+          Danh sách lớp
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
 </ion-content>

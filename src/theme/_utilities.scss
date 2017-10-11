@@ -5,8 +5,11 @@
 .flex {
   display: flex;
 }
-.flex_center {
+.flex_center__horizontal {
   justify-content: center;
+}
+.flex_center__vertical {
+   align-items: center;
 }
 .mar_left_7 {
   margin-left: 7px;

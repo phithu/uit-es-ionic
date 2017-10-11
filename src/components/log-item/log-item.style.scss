@@ -1,3 +1,31 @@
-h1 {
-    color: red !important;
+@import '../../theme/variables.scss';
+log-item {
+    display: block;
+    margin: 10px 0px;
+}
+.account_icon {
+    color: #555555;
+}
+.info_student {
+    margin-left: 10px !important;
+    & > p {
+        margin: 2.5px 0px !important;
+    }
+}
+.time__logs {
+    position: relative;
+    background: color($colors, primary);
+    height: 1px;
+    & > .times {
+        position: absolute;
+        right: 0px;
+        height: 20px;
+        width: 130px;
+        background: color($colors, primary);
+        border-radius: 0px 0px 5px 5px;
+        text-align: center;
+        color: #fff;
+        font-size: 8pt;
+        line-height: 20px;
+    }
 }

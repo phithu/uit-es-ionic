@@ -1,11 +1,10 @@
 import { 
   Component, 
-  OnChanges, 
   OnInit, 
   Input, 
-  ChangeDetectionStrategy,
-  SimpleChanges
+  ChangeDetectionStrategy
  } from '@angular/core';
+ import { List } from 'ionic-angular';
 /**
  * Generated class for the FormBaseComponent component.
  *
