@@ -49,6 +49,7 @@ export class HomePage extends FormBaseComponent implements OnInit {
     super.ngOnInit();
     this.frm.get('search').valueChanges
     .debounceTime(250)
+    .distinctUntilChanged()
     .subscribe((idStudent: string) => {
       if(idStudent.length === 8 && this.frm.valid) {
         this.openNewPage(idStudent);

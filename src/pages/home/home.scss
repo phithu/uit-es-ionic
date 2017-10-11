@@ -4,10 +4,12 @@
 @import '../../theme/_badge.scss';
 
 .wrapper {
-  width: 95%;
-  margin: 0px 2.5%;
+  width: 97%;
+  margin: 0px 1.5%;
   position: fixed;
   top: 55px;
+  height: calc(100vh - 75px);
+  overflow-y: scroll;
 }
 form {
   position: absolute;
@@ -17,12 +19,15 @@ form {
 }
 .card_home {
   position: absolute;
-  transition: top 0.3s ease-out;
+  transition: top 0.2s ease-out;
   top: 90px;
   left: 8px;
   margin: 0px;
   width: calc(100% - 16px);
 
+}
+.card-content-md {
+  padding: 13px 3px;
 }
 .card_down {
   top:135px;

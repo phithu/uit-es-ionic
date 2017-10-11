@@ -19,7 +19,8 @@ import { ExamScheduleModel } from '../../model/exam-schedule';
 export class ExamSchedulePage {
 
   public idStudent: string;
-  public examSchedule: ExamScheduleModel;
+  public examSchedule: any;
+  // public examSchedule: ExamScheduleModel;
 
   constructor(private _navParams: NavParams, 
     private _examSheduleService: ExamSheduleService) {
@@ -27,6 +28,14 @@ export class ExamSchedulePage {
 
   public ionViewDidLoad() {
     this.idStudent = this._navParams.get('idStudent');
+    if(this.idStudent) {
+      this._examSheduleService.getStudent(this.idStudent)
+      .subscribe((response) => {
+        if(response.result) {
+          this.examSchedule = response.data;
+        }
+      })
+    }
   }
 
 }

@@ -1,7 +1,12 @@
-<div *ngIf="log" class="flex">
-  <i class="material-icons">account_circle</i>
-  <div>
+<ng-container *ngIf="log">
+  <div class="flex flex_center__vertical">
+    <i class="material-icons account_icon">account_circle</i>
+    <div class="info_student">
       <p>{{log.nameStudent}}</p>
       <p>{{log.idStudent}}</p>
+    </div>
   </div>
-</div>
+  <div class="time__logs">
+    <div class="times">{{log.time}}</div>
+  </div>
+</ng-container>
