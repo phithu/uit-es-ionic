@@ -12,16 +12,21 @@ const linkAPI = 'https://exam-schedule-api.herokuapp.com';
 @Injectable()
 export class ExamSheduleService {
 
-  constructor(private http: Http) {}
+  constructor(private http: Http) { }
   public getLogs(): Observable<any> {
     return this.http.get(`${linkAPI}/logs`)
-    .map((response) => response.json())
-    .catch(this.handlerError)
+      .map((response) => response.json())
+      .catch(this.handlerError)
   }
   public getStudent(idStudent: string): Observable<any> {
-    return this.http.post(`${linkAPI}/student`, {idStudent: idStudent})
-    .map((response) => response.json())
-    .catch(this.handlerError)
+    return this.http.post(`${linkAPI}/student`, { idStudent: idStudent })
+      .map((response) => response.json())
+      .catch(this.handlerError)
+  }
+  public getRoom(idClass: string, room: string): Observable<any> {
+    return this.http.post(`${linkAPI}/class`, { idClass: idClass, room: room })
+      .map((response) => response.json())
+      .catch(this.handlerError);
   }
   private handlerError(error) {
     return Observable.throw(error);

@@ -7,6 +7,9 @@
     </div>
   </div>
   <div class="time__logs">
-    <div class="times">{{log.time}}</div>
+    <div class="times">
+      <ng-container *ngIf="log.time">{{log.time}}</ng-container>
+      <ng-container *ngIf="log.orderNumber">Số thứ tự: {{log.orderNumber}}</ng-container>
+    </div>
   </div>
 </ng-container>

@@ -1,0 +1,16 @@
+@import '../../theme/variables';
+room-modal {
+ & .card_home {
+    position: static;
+    margin: 10px 8px;
+ }
+ & log-item.active {
+   & .account_icon {
+    color: color($colors, primary);
+   }
+   & .info_student > p {
+     color: color($colors, primary);
+     font-weight: bold;
+   }
+ }
+}
