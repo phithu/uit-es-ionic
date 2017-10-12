@@ -14,9 +14,6 @@
 
 
 <ion-content padding>
-  <!-- <ng-container *ngIf="examSchedule">
-  <pre>{{examSchedule | json}}</pre>
-</ng-container> -->
   <ion-list *ngIf="examSchedule">
     <ion-item-sliding *ngFor="let item of examSchedule.examSchedule">
       <ion-item>
@@ -34,7 +31,7 @@
         </button>
       </ion-item-options>
       <ion-item-options side="right">
-        <button ion-button color="secondary">
+        <button (click)="openRoomModal(item.idClass, item.room, examSchedule.idStudent)" ion-button color="secondary">
             <ion-icon ios="ios-people" md="md-people"></ion-icon>
           Danh sách lớp
         </button>

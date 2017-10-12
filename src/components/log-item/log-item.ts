@@ -22,6 +22,6 @@ export class LogItemComponent implements OnInit {
   @Input() public log: any
 
   public ngOnInit() {
-    console.log(this.log);
+    // console.log(this.log);
   }
 }

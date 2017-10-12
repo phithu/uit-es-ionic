@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-navbar color='primary'>
+    <ion-title>
+      <div class="flex flex_center__horizontal">
+        <span>Danh sách phòng thi</span>
+      </div>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content no-padding>
+  <ion-card *ngIf="listStudent" class="card_home">
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col *ngFor="let log of listStudent" col-12>
+            <log-item [log]="log" [ngClass]="{'active': idStudent == log.idStudent}"></log-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

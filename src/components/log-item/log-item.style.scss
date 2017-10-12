@@ -1,4 +1,4 @@
-@import '../../theme/variables.scss';
+@import '../../theme/variables';
 log-item {
     display: block;
     margin: 10px 0px;
@@ -20,12 +20,13 @@ log-item {
         position: absolute;
         right: 0px;
         height: 20px;
-        width: 130px;
         background: color($colors, primary);
         border-radius: 0px 0px 5px 5px;
         text-align: center;
         color: #fff;
         font-size: 8pt;
-        line-height: 20px;
+        line-height: 10px;
+        padding: 5px;
+        font-weight: bold;
     }
 }
