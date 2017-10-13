@@ -1,0 +1,50 @@
+$sizeThumbnail: 30px;
+loading-student {
+  display: block;
+  .box-loading {
+    background: #fff;
+    height: 80px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    display: block;
+  }
+  
+  .box-thumbnail {
+    height: $sizeThumbnail;
+    width: $sizeThumbnail;
+    border-radius: 50%;
+    float: left;
+    margin-right: 10px;
+  }
+  
+  .box-line-sm {
+    width: 150px;
+    margin: 10px 0px;
+    overflow: hidden;
+    height: 5px;
+  }
+  
+  .box-line-lg {
+    width: 100%;
+    height: 5px;
+    margin-top: 10px;
+  }
+  [class*="box-line"],
+  .box-thumbnail {
+    animation: timeline;
+    animation-duration: 1.2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+    background-size: 800px auto;
+  }
+  @keyframes timeline {
+    0% {
+      background-position: -350px 0;
+    }
+    100% {
+      background-position: 400px 0;
+    }
+  }
+}

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
 import { ExamSchedulePage } from './exam-schedule';
 import { RoomModalModule } from '../room-modal'
+import { LoadingModule } from '../../components/loading';
 
 @NgModule({
   declarations: [
@@ -9,6 +10,7 @@ import { RoomModalModule } from '../room-modal'
   ],
   imports: [
     RoomModalModule,
+    LoadingModule,
     IonicPageModule.forChild(ExamSchedulePage),
   ],
   entryComponents: [

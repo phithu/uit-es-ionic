@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
-import { NavParams } from 'ionic-angular';
+import { NavParams, IonicPage, ViewController } from 'ionic-angular';
 import { ExamSheduleService } from '../../providers/exam-schedule';
 
-/**
- * Generated class for the RoomModalComponent component.
- *
- * See https://angular.io/api/core/Component for more info on Angular
- * Components.
- */
+@IonicPage({
+  priority: 'off'
+})
 @Component({
   selector: 'room-modal',
   templateUrl: 'room-modal.html'
@@ -19,6 +16,7 @@ export class RoomModalComponent {
 
   constructor(
     private _navParams: NavParams,
+    private _viewCtrl: ViewController,
     private _examSheduleService: ExamSheduleService) {
   }
   public ionViewDidLoad() {
@@ -31,6 +29,9 @@ export class RoomModalComponent {
           this.listStudent = response.data;
         }
       });
+  }
+  public closeModal() {
+    this._viewCtrl.dismiss();
   }
 
 }

@@ -4,6 +4,7 @@ import { HomePage } from './home';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicPageModule } from 'ionic-angular';
+import { LoadingModule } from '../../components/loading';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { IonicPageModule } from 'ionic-angular';
     ReactiveFormsModule,
     FormBaseModule,
     LogItemModule,
+    LoadingModule,
     IonicPageModule.forChild(HomePage),
   ],
   entryComponents: [

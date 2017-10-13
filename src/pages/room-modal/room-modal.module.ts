@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RoomModalComponent } from './room-modal';
 import { IonicPageModule } from 'ionic-angular';
 import { LogItemModule } from '../../components/log-item';
+import { LoadingModule } from '../../components/loading';
 @NgModule({
 	declarations: [
 		RoomModalComponent
@@ -10,6 +11,7 @@ import { LogItemModule } from '../../components/log-item';
 	imports: [
 		CommonModule,
 		LogItemModule,
+		LoadingModule,
 		IonicPageModule.forChild(RoomModalComponent),
 	],
 	exports: [
