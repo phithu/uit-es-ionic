@@ -1,6 +1,6 @@
 import { ExamSheduleService } from '../../providers/exam-schedule';
 import { ExamSchedulePage } from './../exam-schedule/exam-schedule';
-import { NavController} from 'ionic-angular';
+import { NavController } from 'ionic-angular';
 import { FormBaseComponent } from './../../components/form-base/form-base';
 import {
   Component,
@@ -44,32 +44,38 @@ export class HomePage extends FormBaseComponent implements OnInit {
     super();
   }
 
-
   public ngOnInit() {
     super.ngOnInit();
-    this.frm.get('search').valueChanges
-    .debounceTime(250)
-    .distinctUntilChanged()
-    .subscribe((idStudent: string) => {
-      if(idStudent.length === 8 && this.frm.valid) {
-        this.openNewPage(idStudent);
-      }
-    });
-    this._examScheduleService.getLogs().subscribe((response) => {
-      if(response.result) {
-        this.listLogs = response.data;
-      }
-    });
 
-   
+    this.searchStudent();
+    this.getLogs();
+
   }
   public openNewPage(idStudent: string) {
-    if(this.frm.valid && idStudent.length === 8) {
+    if (this.frm.valid && idStudent.length === 8) {
       this._navCtrl.push(ExamSchedulePage, {
         idStudent: idStudent
       }, { duration: 250 })
     } else {
       this.frm.markAsDirty();
     }
+  }
+  private searchStudent() {
+    this.frm.get('search').valueChanges
+      .debounceTime(250)
+      .distinctUntilChanged()
+      .subscribe((idStudent: string) => {
+        if (idStudent.length === 8 && this.frm.valid) {
+          this.openNewPage(idStudent);
+        }
+      });
+  }
+  private getLogs() {
+    this._examScheduleService.getLogs()
+      .subscribe((response) => {
+        if (response.result) {
+          this.listLogs = response.data;
+        }
+      });
   }
 }

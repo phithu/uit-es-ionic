@@ -8,7 +8,6 @@
     </ion-title>
   </ion-navbar>
 </ion-header>
-
 <ion-content scrollDownOnLoad="true">
   <div class="wrapper">
     <form [formGroup]="frm" (ngSubmit)="openNewPage(frm.value.search)">
@@ -18,11 +17,11 @@
         {{formErrors.search}}
       </ion-badge>
     </form>
-    <ion-card *ngIf="listLogs" class="card_home" [ngClass]="{'card_down': formErrors.search}">
+    <ion-card class="card_home" [ngClass]="{'card_down': formErrors.search}">
       <ion-card-header>
         Hoạt động gần đây
       </ion-card-header>
-      <ion-card-content>
+      <ion-card-content *ngIf="listLogs">
         <ion-grid>
           <ion-row>
             <ion-col *ngFor="let log of listLogs" col-12>
@@ -31,28 +30,48 @@
           </ion-row>
         </ion-grid>
       </ion-card-content>
+      <ion-card-content *ngIf="!listLogs">
+        <ion-grid>
+          <ion-row>
+            <ion-col col-12>
+              <loading-student></loading-student>
+            </ion-col>
+            <ion-col col-12>
+              <loading-student></loading-student>
+            </ion-col>
+            <ion-col col-12>
+              <loading-student></loading-student>
+            </ion-col>
+            <ion-col col-12>
+              <loading-student></loading-student>
+            </ion-col>
+            <ion-col col-12>
+              <loading-student></loading-student>
+            </ion-col>
+            <ion-col col-12>
+              <loading-student></loading-student>
+            </ion-col>
+            <ion-col col-12>
+              <loading-student></loading-student>
+            </ion-col>
+            <ion-col col-12>
+              <loading-student></loading-student>
+            </ion-col>
+            <ion-col col-12>
+              <loading-student></loading-student>
+            </ion-col>
+            <ion-col col-12>
+              <loading-student></loading-student>
+            </ion-col>
+            <ion-col col-12>
+              <loading-student></loading-student>
+            </ion-col>
+            <ion-col col-12>
+              <loading-student></loading-student>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
     </ion-card>
   </div>
-
-  <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit non, alias tempora numquam mollitia quisquam molestias
-    iste nihil, consequuntur corrupti earum totam nulla odit! Reprehenderit quia, quo laudantium sapiente architecto quae
-    molestiae ea tenetur soluta quidem illo esse assumenda qui provident aut quibusdam neque sunt. Quisquam magni blanditiis
-    numquam officiis. Recusandae illo sed ut ipsa voluptates maiores reprehenderit quaerat similique, quos at neque ad unde
-    rem praesentium molestiae sapiente alias cumque, autem non consectetur dolorem itaque facere corrupti. Totam doloribus
-    cum ratione aut adipisci ea laborum consequuntur vel voluptatibus labore a nulla sint, veritatis ab qui omnis asperiores
-    ipsa impedit?</p>
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit non, alias tempora numquam mollitia quisquam molestias
-    iste nihil, consequuntur corrupti earum totam nulla odit! Reprehenderit quia, quo laudantium sapiente architecto quae
-    molestiae ea tenetur soluta quidem illo esse assumenda qui provident aut quibusdam neque sunt. Quisquam magni blanditiis
-    numquam officiis. Recusandae illo sed ut ipsa voluptates maiores reprehenderit quaerat similique, quos at neque ad unde
-    rem praesentium molestiae sapiente alias cumque, autem non consectetur dolorem itaque facere corrupti. Totam doloribus
-    cum ratione aut adipisci ea laborum consequuntur vel voluptatibus labore a nulla sint, veritatis ab qui omnis asperiores
-    ipsa impedit?</p>
-  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit non, alias tempora numquam mollitia quisquam molestias
-    iste nihil, consequuntur corrupti earum totam nulla odit! Reprehenderit quia, quo laudantium sapiente architecto quae
-    molestiae ea tenetur soluta quidem illo esse assumenda qui provident aut quibusdam neque sunt. Quisquam magni blanditiis
-    numquam officiis. Recusandae illo sed ut ipsa voluptates maiores reprehenderit quaerat similique, quos at neque ad unde
-    rem praesentium molestiae sapiente alias cumque, autem non consectetur dolorem itaque facere corrupti. Totam doloribus
-    cum ratione aut adipisci ea laborum consequuntur vel voluptatibus labore a nulla sint, veritatis ab qui omnis asperiores
-    ipsa impedit?</p> -->
 </ion-content>

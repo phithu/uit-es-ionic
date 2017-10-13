@@ -1,0 +1,40 @@
+loading-room {
+  display: block;
+  .box-loading {
+    background: #fff;
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    display: block;
+  }
+  
+  .box-line-lg {
+    width: 100%;
+    height: 8px;
+    margin: 10px 0px;
+    &:first-child {
+      margin-top: 0px
+    }
+    &:last-child {
+      margin-bottom: 0px;
+    }
+    // margin: 15px 0px;
+  }
+  [class*="box-line"],
+  .box-thumbnail {
+    animation: timeline;
+    animation-duration: 1.2s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    background: linear-gradient(to right, #eeeeee 8%, #dddddd 18%, #eeeeee 33%);
+    background-size: 800px auto;
+  }
+  @keyframes timeline {
+    0% {
+      background-position: -350px 0;
+    }
+    100% {
+      background-position: 400px 0;
+    }
+  }
+}

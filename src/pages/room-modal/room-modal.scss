@@ -13,4 +13,12 @@ room-modal {
      font-weight: bold;
    }
  }
+ & .toolbar-content-ios {
+  & > .close_button {
+    height: initial !important;
+  }
+ }
+ & .toolbar-content-md {
+   display: flex;
+ }
 }

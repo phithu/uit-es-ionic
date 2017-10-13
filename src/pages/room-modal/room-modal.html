@@ -1,19 +1,64 @@
 <ion-header>
   <ion-navbar color='primary'>
     <ion-title>
-      <div class="flex flex_center__horizontal">
+      <div class="flex flex_center__vertical">
         <span>Danh sách phòng thi</span>
       </div>
     </ion-title>
+    <button class="close_button disabled_boxShadow" ion-button icon-only (click)="closeModal()">
+      <ion-icon ios="ios-arrow-back" md="md-close"></ion-icon>
+    </button>
   </ion-navbar>
 </ion-header>
 <ion-content no-padding>
-  <ion-card *ngIf="listStudent" class="card_home">
-    <ion-card-content>
+  <ion-card class="card_home">
+    <ion-card-content *ngIf="listStudent">
       <ion-grid>
         <ion-row>
           <ion-col *ngFor="let log of listStudent" col-12>
             <log-item [log]="log" [ngClass]="{'active': idStudent == log.idStudent}"></log-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+    <ion-card-content *ngIf="!listStudent">
+      <ion-grid>
+        <ion-row>
+          <ion-col col-12>
+            <loading-student></loading-student>
+          </ion-col>
+          <ion-col col-12>
+            <loading-student></loading-student>
+          </ion-col>
+          <ion-col col-12>
+            <loading-student></loading-student>
+          </ion-col>
+          <ion-col col-12>
+            <loading-student></loading-student>
+          </ion-col>
+          <ion-col col-12>
+            <loading-student></loading-student>
+          </ion-col>
+          <ion-col col-12>
+            <loading-student></loading-student>
+          </ion-col>
+          <ion-col col-12>
+            <loading-student></loading-student>
+          </ion-col>
+          <ion-col col-12>
+            <loading-student></loading-student>
+          </ion-col>
+          <ion-col col-12>
+            <loading-student></loading-student>
+          </ion-col>
+          <ion-col col-12>
+            <loading-student></loading-student>
+          </ion-col>
+          <ion-col col-12>
+            <loading-student></loading-student>
+          </ion-col>
+          <ion-col col-12>
+            <loading-student></loading-student>
           </ion-col>
         </ion-row>
       </ion-grid>

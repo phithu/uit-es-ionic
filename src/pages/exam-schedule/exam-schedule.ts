@@ -1,14 +1,7 @@
 import { ExamSheduleService } from '../../providers/exam-schedule';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController } from 'ionic-angular';
-import { ExamScheduleModel } from '../../model/exam-schedule';
+import { IonicPage, NavParams, ModalController } from 'ionic-angular';
 import { RoomModalComponent } from '../room-modal';
-/**
- * Generated class for the ExamSchedulePage page.
- *
- * See https://ionicframework.com/docs/components/#navigation for more info on
- * Ionic pages and navigation.
- */
 
 @IonicPage({
   priority: 'off'
@@ -29,15 +22,8 @@ export class ExamSchedulePage {
   }
 
   public ionViewDidLoad() {
-    this.idStudent = this._navParams.get('idStudent');
-    if (this.idStudent) {
-      this._examSheduleService.getStudent(this.idStudent)
-        .subscribe((response) => {
-          if (response.result) {
-            this.examSchedule = response.data;
-          }
-        })
-    }
+    this.getExamShedule();
+
   }
   public openRoomModal(idClass: string, room: string, idStudent: string) {
     let data = {
@@ -48,5 +34,16 @@ export class ExamSchedulePage {
     let roomModal = this._modalCtrl.create(RoomModalComponent, data);
     roomModal.present();
   }
-
+  private getExamShedule() {
+    this.idStudent = this._navParams.get('idStudent');
+    if (this.idStudent) {
+      this._examSheduleService.getStudent(this.idStudent)
+        .subscribe((response) => {
+          console.log(response);
+          if (response.result) {
+            this.examSchedule = response.data;
+          }
+        })
+    }
+  }
 }
