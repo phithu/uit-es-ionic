@@ -6,7 +6,7 @@ import {
 
 @Component({
   selector: 'log-item',
-  templateUrl: 'log-item.template.html',
+  templateUrl: 'log-item.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 
 })

@@ -1,0 +1,26 @@
+@import '../../theme/_utilities';
+@import '../../theme/variables';
+alert-error {
+  background: color($colors, danger);
+  margin: 0px 50px;
+  margin-top: 10px;
+  display: block;
+  color: #fff;
+  box-shadow: 2px 2px 2px #9c9a9a;
+  border-radius: 3px;
+  padding: 3px 10px;
+  & .box {
+    width: 100%;
+    & p {
+      margin: 5px 0px;
+      font-size: 9pt;
+      font-weight: bold;
+    }
+    & .material-icons {
+      height: 24px;
+      line-height: 24px;
+      font-size: 13pt;
+    }
+  }
+
+}

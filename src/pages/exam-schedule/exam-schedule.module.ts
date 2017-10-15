@@ -3,6 +3,8 @@ import { IonicPageModule } from 'ionic-angular';
 import { ExamSchedulePage } from './exam-schedule';
 import { RoomModalModule } from '../room-modal'
 import { LoadingModule } from '../../components/loading';
+import { NotFoundModule } from '../../components/not-found';
+import { AlertErrorModule } from '../../components/alert-error';
 
 @NgModule({
   declarations: [
@@ -11,6 +13,8 @@ import { LoadingModule } from '../../components/loading';
   imports: [
     RoomModalModule,
     LoadingModule,
+    NotFoundModule,
+    AlertErrorModule,
     IonicPageModule.forChild(ExamSchedulePage),
   ],
   entryComponents: [

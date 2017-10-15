@@ -13,9 +13,7 @@
     <form [formGroup]="frm" (ngSubmit)="openNewPage(frm.value.search)">
       <ion-searchbar type="number" placeholder="Mã số sinh viên..." formControlName="search" [showCancelButton]="shouldShowCancel">
       </ion-searchbar>
-      <ion-badge class="block_center badge__danger" *ngIf="formErrors.search">
-        {{formErrors.search}}
-      </ion-badge>
+      <alert-error *ngIf="formErrors.search" [message]="formErrors.search"></alert-error>
     </form>
     <ion-card class="card_home" [ngClass]="{'card_down': formErrors.search}">
       <ion-card-header>
