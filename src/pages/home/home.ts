@@ -1,3 +1,5 @@
+import { BackgroundMode } from '@ionic-native/background-mode';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 import { ExamSheduleService } from '../../providers/exam-schedule';
 import { ExamSchedulePage } from './../exam-schedule/exam-schedule';
 import { NavController, ToastController } from 'ionic-angular';
@@ -41,6 +43,8 @@ export class HomePage extends FormBaseComponent implements OnInit {
   constructor(
     private _examScheduleService: ExamSheduleService,
     private _toastCtrl: ToastController,
+    private _localNotifications: LocalNotifications,
+    private _backgroundMode: BackgroundMode,
     private _navCtrl: NavController) {
     super();
   }
@@ -60,6 +64,17 @@ export class HomePage extends FormBaseComponent implements OnInit {
     } else {
       this.frm.markAsDirty();
     }
+  }
+  public ionViewDidLoad() {
+    // this._backgroundMode.on('activate').subscribe(() => {
+    //   this._localNotifications.schedule({
+    //     text: 'Delayed ILocalNotification',
+    //     at: new Date(new Date().getTime() + 7200),
+    //     led: 'FF0000',
+    //     sound: null
+    //   });
+    // })
+
   }
   private searchStudent() {
     this.frm.get('search').valueChanges

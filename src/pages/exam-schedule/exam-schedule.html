@@ -14,7 +14,7 @@
 <ion-content padding>
   <ng-container *ngIf="examSchedule; else listEmpty">
     <ion-list>
-      <ion-item-sliding *ngFor="let item of examSchedule.examSchedule">
+      <ion-item-sliding #ItemSliding *ngFor="let item of examSchedule.examSchedule">
         <ion-item>
           <h2 class="item__exam">
             <strong>Môn thi:</strong> {{item.class}}</h2>
@@ -30,18 +30,19 @@
             <strong>Phòng thi:</strong> {{item.room}}</h2>
         </ion-item>
         <ion-item-options side="left">
-          <button (click)="picker.open()" ion-button color="danger">
-            <ion-icon ios="ios-alarm" md="md-alarm"></ion-icon>
-            Đặt lịch
-            <ion-datetime (ionChange)="changeDate($event)" cancelText="Hủy" doneText="Đặt lịch" 
-            class="displayNone" min="2017-10-16" #picker displayFormat="DD MM YYYY HH:mm" [(ngModel)]="myDate">
-            </ion-datetime>
+          <button (click)="openRoomModal(item.idClass, item.room, examSchedule.idStudent)" ion-button color="secondary">
+            <ion-icon ios="ios-people" md="md-people"></ion-icon>
+            Danh sách phòng thi
           </button>
         </ion-item-options>
         <ion-item-options side="right">
-          <button (click)="openRoomModal(item.idClass, item.room, examSchedule.idStudent)" ion-button color="secondary">
-            <ion-icon ios="ios-people" md="md-people"></ion-icon>
-            Danh sách lớp
+          <button (click)="picker.open()" ion-button color="danger">
+            <ion-icon ios="ios-alarm" md="md-alarm"></ion-icon>
+            Thông báo
+            <ion-datetime (ionChange)="changeDate($event, ItemSliding)" cancelText="Hủy" doneText="Đặt lịch" 
+            class="displayNone" [min]="dateMin(item.date, item.hours)" [max]="dateMax(item.date, item.hours)" 
+            #picker displayFormat="DD MM YYYY HH:mm" [(ngModel)]="myDate">
+            </ion-datetime>
           </button>
         </ion-item-options>
       </ion-item-sliding>

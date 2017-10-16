@@ -3,9 +3,12 @@ import { ExamSchedulePageModule } from './../pages/exam-schedule/exam-schedule.m
 import { HttpModule } from '@angular/http';
 // Core Angular - Ionic
 import { ErrorHandler, NgModule } from '@angular/core';
+
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { BackgroundMode } from '@ionic-native/background-mode';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 // Module
 import { BrowserModule } from '@angular/platform-browser';
@@ -37,6 +40,8 @@ import { MyApp } from './app.component';
   providers: [
     ExamSheduleService,
     StatusBar,
+    LocalNotifications,
+    BackgroundMode,
     SplashScreen,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
