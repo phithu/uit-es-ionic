@@ -15,6 +15,7 @@ export class ExamSchedulePage {
   public idStudent: string;
   public examSchedule: any;
   public errorMsg: string;
+  public myDate: any;
 
   constructor(
     private _navParams: NavParams,
@@ -22,6 +23,11 @@ export class ExamSchedulePage {
     private _toastCtrl: ToastController,
     private _modalCtrl: ModalController) {
   }
+
+  // public set dateMin(date: string, hour: string): string {
+  //   return null;
+
+  // }
 
   public ionViewDidLoad() {
     this.getExamShedule();
@@ -35,6 +41,9 @@ export class ExamSchedulePage {
     };
     let roomModal = this._modalCtrl.create(RoomModalComponent, data);
     roomModal.present();
+  }
+  public changeDate(e: any) {
+    console.log(e);
   }
   private getExamShedule() {
     this.idStudent = this._navParams.get('idStudent');

@@ -30,9 +30,12 @@
             <strong>Phòng thi:</strong> {{item.room}}</h2>
         </ion-item>
         <ion-item-options side="left">
-          <button ion-button color="danger">
+          <button (click)="picker.open()" ion-button color="danger">
             <ion-icon ios="ios-alarm" md="md-alarm"></ion-icon>
             Đặt lịch
+            <ion-datetime (ionChange)="changeDate($event)" cancelText="Hủy" doneText="Đặt lịch" 
+            class="displayNone" min="2017-10-16" #picker displayFormat="DD MM YYYY HH:mm" [(ngModel)]="myDate">
+            </ion-datetime>
           </button>
         </ion-item-options>
         <ion-item-options side="right">

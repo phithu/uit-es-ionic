@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="io.ionic.starter" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Lịch thi UIT</name>
+    <name>MyApp</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
     <content src="index.html" />
@@ -87,10 +87,12 @@
     <allow-navigation href="http://192.168.1.151:8100" />
     <allow-navigation href="http://192.168.1.161:8100" />
     <allow-navigation href="http://192.168.1.166:8100" />
+    <allow-navigation href="http://192.168.1.16:8100" />
     <engine name="android" spec="^6.2.3" />
     <plugin name="cordova-plugin-device" spec="1.1.4" />
     <plugin name="cordova-plugin-splashscreen" spec="~4.0.1" />
     <plugin name="cordova-plugin-statusbar" spec="2.2.2" />
     <plugin name="cordova-plugin-whitelist" spec="1.3.1" />
     <plugin name="ionic-plugin-keyboard" spec="~2.2.1" />
+    <plugin name="de.appplant.cordova.plugin.local-notification" spec="^0.8.5" />
 </widget>
