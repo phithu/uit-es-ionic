@@ -5,60 +5,59 @@
         Lịch thi {{examSchedule.nameStudent}}
       </ng-container>
       <ng-template #isLoading>
-        <loading-text></loading-text>
+        <loading-text *ngIf="!errorMsg"></loading-text>
+        <ng-container *ngIf="errorMsg">Không thể truy cập</ng-container>
       </ng-template>
     </ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-  <ion-list *ngIf="examSchedule">
-    <ion-item-sliding *ngFor="let item of examSchedule.examSchedule">
+  <ng-container *ngIf="examSchedule; else listEmpty">
+    <ion-list>
+      <ion-item-sliding *ngFor="let item of examSchedule.examSchedule">
+        <ion-item>
+          <h2 class="item__exam">
+            <strong>Môn thi:</strong> {{item.class}}</h2>
+          <h2 class="item__exam">
+            <strong>Mã lớp:</strong> {{item.idClass}}</h2>
+          <h2 class="item__exam">
+            <strong>STT:</strong> {{item.orderNumber}}</h2>
+          <h2 class="item__exam">
+            <strong>Ngày thi:</strong> {{item.date}}</h2>
+          <h2 class="item__exam">
+            <strong>Ca thi:</strong> {{item.shirt}} - ({{item.hours}})</h2>
+          <h2 class="item__exam">
+            <strong>Phòng thi:</strong> {{item.room}}</h2>
+        </ion-item>
+        <ion-item-options side="left">
+          <button ion-button color="danger">
+            <ion-icon ios="ios-alarm" md="md-alarm"></ion-icon>
+            Đặt lịch
+          </button>
+        </ion-item-options>
+        <ion-item-options side="right">
+          <button (click)="openRoomModal(item.idClass, item.room, examSchedule.idStudent)" ion-button color="secondary">
+            <ion-icon ios="ios-people" md="md-people"></ion-icon>
+            Danh sách lớp
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+  </ng-container>
+  <ng-template #listEmpty>
+    <ion-list *ngIf="!errorMsg">
       <ion-item>
-        <h2 class="item__exam">
-          <strong>Môn thi:</strong> {{item.class}}</h2>
-        <h2 class="item__exam">
-          <strong>Mã lớp:</strong> {{item.idClass}}</h2>
-        <h2 class="item__exam">
-          <strong>STT:</strong> {{item.orderNumber}}</h2>
-        <h2 class="item__exam">
-          <strong>Ngày thi:</strong> {{item.date}}</h2>
-        <h2 class="item__exam">
-          <strong>Ca thi:</strong> {{item.shirt}} - ({{item.hours}})</h2>
-        <h2 class="item__exam">
-          <strong>Phòng thi:</strong> {{item.room}}</h2>
+        <loading-room></loading-room>
       </ion-item>
-      <ion-item-options side="left">
-        <button ion-button color="danger">
-          <ion-icon ios="ios-alarm" md="md-alarm"></ion-icon>
-          Đặt lịch
-        </button>
-      </ion-item-options>
-      <ion-item-options side="right">
-        <button (click)="openRoomModal(item.idClass, item.room, examSchedule.idStudent)" ion-button color="secondary">
-          <ion-icon ios="ios-people" md="md-people"></ion-icon>
-          Danh sách lớp
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
-  <ion-list *ngIf="!examSchedule">
-    <ion-item>
-      <loading-room></loading-room>
-    </ion-item>
-    <ion-item>
-      <loading-room></loading-room>
-    </ion-item>
-    <ion-item>
-      <loading-room></loading-room>
-    </ion-item>
-    <ion-item>
-      <loading-room></loading-room>
-    </ion-item>
-    <ion-item>
-      <loading-room></loading-room>
-    </ion-item>
-    <ion-item>
-      <loading-room></loading-room>
-    </ion-item>
-  </ion-list>
+      <ion-item>
+        <loading-room></loading-room>
+      </ion-item>
+      <ion-item>
+        <loading-room></loading-room>
+      </ion-item>
+    </ion-list>
+    <ng-container *ngIf="errorMsg">
+      <not-found [message]="errorMsg"></not-found>
+    </ng-container>
+  </ng-template>
 </ion-content>

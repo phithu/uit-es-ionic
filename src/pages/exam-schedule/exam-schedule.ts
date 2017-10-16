@@ -1,6 +1,6 @@
 import { ExamSheduleService } from '../../providers/exam-schedule';
 import { Component } from '@angular/core';
-import { IonicPage, NavParams, ModalController } from 'ionic-angular';
+import { IonicPage, NavParams, ModalController, ToastController } from 'ionic-angular';
 import { RoomModalComponent } from '../room-modal';
 
 @IonicPage({
@@ -14,10 +14,12 @@ export class ExamSchedulePage {
 
   public idStudent: string;
   public examSchedule: any;
+  public errorMsg: string;
 
   constructor(
     private _navParams: NavParams,
     private _examSheduleService: ExamSheduleService,
+    private _toastCtrl: ToastController,
     private _modalCtrl: ModalController) {
   }
 
@@ -39,11 +41,27 @@ export class ExamSchedulePage {
     if (this.idStudent) {
       this._examSheduleService.getStudent(this.idStudent)
         .subscribe((response) => {
-          console.log(response);
           if (response.result) {
             this.examSchedule = response.data;
+            if (response.msg !== 'success') {
+              this.errorMsg = response.msg;
+            }
           }
+        },
+        // errror
+        () => {
+          let msg = 'Rất tiếc! Hiện tại không thể lấy dữ liệu. Vui lòng kiểm tra lại kết nối Internet và thử lại.';
+          this.showToast(msg);
         })
     }
+  }
+  private showToast(message: string) {
+    this._toastCtrl
+      .create({
+        message: message,
+        duration: 20000,
+        showCloseButton: true
+      })
+      .present();
   }
 }

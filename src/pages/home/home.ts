@@ -1,6 +1,6 @@
 import { ExamSheduleService } from '../../providers/exam-schedule';
 import { ExamSchedulePage } from './../exam-schedule/exam-schedule';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 import { FormBaseComponent } from './../../components/form-base/form-base';
 import {
   Component,
@@ -40,6 +40,7 @@ export class HomePage extends FormBaseComponent implements OnInit {
   }
   constructor(
     private _examScheduleService: ExamSheduleService,
+    private _toastCtrl: ToastController,
     private _navCtrl: NavController) {
     super();
   }
@@ -76,6 +77,19 @@ export class HomePage extends FormBaseComponent implements OnInit {
         if (response.result) {
           this.listLogs = response.data;
         }
+      }, (err) => {
+        let msg = 'Rất tiếc! Hiện tại không thể lấy dữ liệu. Vui lòng kiểm tra lại kết nối Internet và thử lại.';
+        this.showToast(msg);
       });
   }
+  private showToast(message: string) {
+    this._toastCtrl
+      .create({
+        message: message,
+        duration: 20000,
+        showCloseButton: true
+      })
+      .present()
+  }
+
 }
