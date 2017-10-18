@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicPageModule } from 'ionic-angular';
 import { LoadingModule } from '../../components/loading';
 import { AlertErrorModule } from '../../components/alert-error';
+import { CoreModule } from '../../module/core-module';
 
 
 @NgModule({
@@ -13,6 +14,7 @@ import { AlertErrorModule } from '../../components/alert-error';
     HomePage
   ],
   imports: [
+    CoreModule,
     FormsModule,
     ReactiveFormsModule,
     FormBaseModule,

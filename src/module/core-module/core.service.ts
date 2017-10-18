@@ -5,7 +5,7 @@ import { Observable } from 'rxjs/Observable';
 const linkAPI = 'https://uit-es.herokuapp.com';
 
 @Injectable()
-export class ExamSheduleService {
+export class CoreService {
 
   constructor(private http: Http) { }
   public getLogs(): Observable<any> {

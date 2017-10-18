@@ -1,15 +1,10 @@
-import { BackgroundMode } from '@ionic-native/background-mode';
-import { LocalNotifications } from '@ionic-native/local-notifications';
-import { ExamSheduleService } from '../../providers/exam-schedule';
 import { ExamSchedulePage } from './../exam-schedule/exam-schedule';
 import { NavController, ToastController } from 'ionic-angular';
 import { FormBaseComponent } from './../../components/form-base/form-base';
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
-import 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { CoreService } from '../../module/core-module';
+
 
 
 @Component({
@@ -19,7 +14,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class HomePage extends FormBaseComponent implements OnInit {
 
   public listLogs: any[];
-
+  public path: any;
   public frm: FormGroup;
   public formErrors = {
     search: ''
@@ -41,22 +36,18 @@ export class HomePage extends FormBaseComponent implements OnInit {
     ])
   }
   constructor(
-    private _examScheduleService: ExamSheduleService,
+    private _coreService: CoreService,
     private _toastCtrl: ToastController,
-    private _localNotifications: LocalNotifications,
-    private _backgroundMode: BackgroundMode,
     private _navCtrl: NavController) {
     super();
   }
-
   public ngOnInit() {
     super.ngOnInit();
-
     this.searchStudent();
     this.getLogs();
 
   }
-  public openNewPage(idStudent: string) {
+  public openExamSchedulePage(idStudent: string) {
     if (this.frm.valid && idStudent.length === 8) {
       this._navCtrl.push(ExamSchedulePage, {
         idStudent: idStudent
@@ -65,29 +56,18 @@ export class HomePage extends FormBaseComponent implements OnInit {
       this.frm.markAsDirty();
     }
   }
-  public ionViewDidLoad() {
-    // this._backgroundMode.on('activate').subscribe(() => {
-    //   this._localNotifications.schedule({
-    //     text: 'Delayed ILocalNotification',
-    //     at: new Date(new Date().getTime() + 7200),
-    //     led: 'FF0000',
-    //     sound: null
-    //   });
-    // })
-
-  }
   private searchStudent() {
     this.frm.get('search').valueChanges
       .debounceTime(250)
       .distinctUntilChanged()
       .subscribe((idStudent: string) => {
         if (idStudent.length === 8 && this.frm.valid) {
-          this.openNewPage(idStudent);
+          this.openExamSchedulePage(idStudent);
         }
       });
   }
   private getLogs() {
-    this._examScheduleService.getLogs()
+    this._coreService.getLogs()
       .subscribe((response) => {
         if (response.result) {
           this.listLogs = response.data;

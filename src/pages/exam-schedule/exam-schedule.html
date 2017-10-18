@@ -14,20 +14,26 @@
 <ion-content padding>
   <ng-container *ngIf="examSchedule; else listEmpty">
     <ion-list>
-      <ion-item-sliding #ItemSliding *ngFor="let item of examSchedule.examSchedule">
+      <ion-item-sliding #ItemSliding *ngFor="let item of examSchedule.examSchedule; let indexSchedule = index">
         <ion-item>
           <h2 class="item__exam">
-            <strong>Môn thi:</strong> {{item.class}}</h2>
+            <strong>Môn thi:</strong> {{item.class}}
+          </h2>
           <h2 class="item__exam">
-            <strong>Mã lớp:</strong> {{item.idClass}}</h2>
+            <strong>Mã lớp:</strong> {{item.idClass}}
+          </h2>
           <h2 class="item__exam">
-            <strong>STT:</strong> {{item.orderNumber}}</h2>
+            <strong>STT:</strong> {{item.orderNumber}}
+          </h2>
           <h2 class="item__exam">
-            <strong>Ngày thi:</strong> {{item.date}}</h2>
+            <strong>Ngày thi:</strong> {{item.date}}
+          </h2>
           <h2 class="item__exam">
-            <strong>Ca thi:</strong> {{item.shirt}} - ({{item.hours}})</h2>
+            <strong>Ca thi:</strong> {{item.shirt}} - ({{item.hours}})
+          </h2>
           <h2 class="item__exam">
-            <strong>Phòng thi:</strong> {{item.room}}</h2>
+            <strong>Phòng thi:</strong> {{item.room}}
+          </h2>
         </ion-item>
         <ion-item-options side="left">
           <button (click)="openRoomModal(item.idClass, item.room, examSchedule.idStudent)" ion-button color="secondary">
@@ -39,7 +45,7 @@
           <button (click)="picker.open()" ion-button color="danger">
             <ion-icon ios="ios-alarm" md="md-alarm"></ion-icon>
             Thông báo
-            <ion-datetime (ionChange)="changeDate($event, ItemSliding)" cancelText="Hủy" doneText="Đặt lịch" 
+            <ion-datetime (ionChange)="changeDate($event, item)" cancelText="Hủy" doneText="Đặt lịch" 
             class="displayNone" [min]="dateMin(item.date, item.hours)" [max]="dateMax(item.date, item.hours)" 
             #picker displayFormat="DD MM YYYY HH:mm" [(ngModel)]="myDate">
             </ion-datetime>

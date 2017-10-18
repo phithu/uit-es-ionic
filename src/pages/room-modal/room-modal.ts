@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavParams, IonicPage, ViewController } from 'ionic-angular';
-import { ExamSheduleService } from '../../providers/exam-schedule';
+import { CoreService } from '../../module/core-module';
+
 
 @IonicPage({
   priority: 'off'
@@ -17,13 +18,13 @@ export class RoomModalComponent {
   constructor(
     private _navParams: NavParams,
     private _viewCtrl: ViewController,
-    private _examSheduleService: ExamSheduleService) {
+    private _coreService: CoreService) {
   }
   public ionViewDidLoad() {
     let idClass = this._navParams.data.idClass;
     let room = this._navParams.data.room;
     this.idStudent = this._navParams.data.idStudent;
-    this._examSheduleService.getRoom(idClass, room)
+    this._coreService.getRoom(idClass, room)
       .subscribe((response) => {
         if (response.result) {
           this.listStudent = response.data;
