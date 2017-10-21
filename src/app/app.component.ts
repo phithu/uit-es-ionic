@@ -18,7 +18,7 @@ export class MyApp {
 
     if (this._platform.is('cordova')) {
       this._platform.ready().then(() => {
-        this._statusBar.backgroundColorByHexString('#006AA9');
+        this._statusBar.backgroundColorByHexString('#00675b');
         this._splashScreen.hide();
       });
     } else {

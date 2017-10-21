@@ -10,6 +10,8 @@ export class ScheduleNotiService {
 
     public streamSchedules = new BehaviorSubject<ScheduleNotiModel[]>([]);
 
+    // public $streamSchedules = this.streamSchedules.asObservable();
+
     public get listSchedules(): ScheduleNotiModel[] {
         return this.streamSchedules.value;
     }

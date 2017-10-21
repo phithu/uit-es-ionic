@@ -7,6 +7,7 @@ import { IonicPageModule } from 'ionic-angular';
 import { LoadingModule } from '../../components/loading';
 import { AlertErrorModule } from '../../components/alert-error';
 import { CoreModule } from '../../module/core-module';
+import { ScheduleNotiModule } from '../../module/schedule-noti';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { CoreModule } from '../../module/core-module';
     FormBaseModule,
     LogItemModule,
     LoadingModule,
+    ScheduleNotiModule,
     AlertErrorModule,
     IonicPageModule.forChild(HomePage),
   ],

@@ -1,7 +1,7 @@
 export interface ScheduleNotiModel {
     id: any,
     sound?: string,
-    at: Date,
+    at: number,
     icon?: string,
     text: string,
     title?: string,
