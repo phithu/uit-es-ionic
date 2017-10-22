@@ -34,15 +34,15 @@
           <h2 class="item__exam">
             <strong>Phòng thi:</strong> {{item.room}}
           </h2>
-          <ng-container *ngIf="listScheduleNoti">
+          <!-- <ng-container *ngIf="listScheduleNoti">
             <p>Or: {{item.idClass}}</p>
             <ng-container *ngFor="let listItem of listScheduleNoti">
               <p>{{listItem.data.idClass}}</p>
-             <!-- <ng-container *ngIf="item.idClass == listItem.data.idClass">
+             <ng-container *ngIf="item.idClass == listItem.data.idClass">
                <p>{{listItem.title}}</p>
-             </ng-container> -->
+             </ng-container>
             </ng-container>
-          </ng-container>
+          </ng-container> -->
         </ion-item>
         <ion-item-options side="left">
           <button (click)="openRoomModal(item.idClass, item.room, examSchedule.idStudent)" ion-button color="secondary">
