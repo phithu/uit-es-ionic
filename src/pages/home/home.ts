@@ -1,13 +1,12 @@
-import { ExamSheduleService } from '../../providers/exam-schedule';
 import { ExamSchedulePage } from './../exam-schedule/exam-schedule';
 import { NavController, ToastController } from 'ionic-angular';
 import { FormBaseComponent } from './../../components/form-base/form-base';
-import {
-  Component,
-  OnInit,
-} from '@angular/core';
-import 'rxjs';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { CoreService } from '../../module/core-module';
+import { ScheduleNotiService, ScheduleNotiModel } from '../../module/schedule-noti';
+import { Subscription } from 'rxjs';
+
 
 
 @Component({
@@ -17,7 +16,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class HomePage extends FormBaseComponent implements OnInit {
 
   public listLogs: any[];
-
+  public path: any;
   public frm: FormGroup;
   public formErrors = {
     search: ''
@@ -38,21 +37,28 @@ export class HomePage extends FormBaseComponent implements OnInit {
       Validators.minLength(8)
     ])
   }
+
+  // public subscribeNotification: Subscription;
+
   constructor(
-    private _examScheduleService: ExamSheduleService,
+    private _coreService: CoreService,
     private _toastCtrl: ToastController,
+    private _scheduleNotiService: ScheduleNotiService,
     private _navCtrl: NavController) {
     super();
   }
-
   public ngOnInit() {
     super.ngOnInit();
-
     this.searchStudent();
+  }
+
+  // Will enter page
+  public ionViewWillEnter() {
     this.getLogs();
 
   }
-  public openNewPage(idStudent: string) {
+
+  public openExamSchedulePage(idStudent: string) {
     if (this.frm.valid && idStudent.length === 8) {
       this._navCtrl.push(ExamSchedulePage, {
         idStudent: idStudent
@@ -61,18 +67,21 @@ export class HomePage extends FormBaseComponent implements OnInit {
       this.frm.markAsDirty();
     }
   }
+
   private searchStudent() {
     this.frm.get('search').valueChanges
       .debounceTime(250)
       .distinctUntilChanged()
       .subscribe((idStudent: string) => {
         if (idStudent.length === 8 && this.frm.valid) {
-          this.openNewPage(idStudent);
+          this.openExamSchedulePage(idStudent);
+          this._scheduleNotiService.streamSchedules.next([]);
         }
       });
   }
+
   private getLogs() {
-    this._examScheduleService.getLogs()
+    this._coreService.getLogs()
       .subscribe((response) => {
         if (response.result) {
           this.listLogs = response.data;
@@ -82,6 +91,7 @@ export class HomePage extends FormBaseComponent implements OnInit {
         this.showToast(msg);
       });
   }
+
   private showToast(message: string) {
     this._toastCtrl
       .create({

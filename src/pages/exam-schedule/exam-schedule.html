@@ -14,31 +14,46 @@
 <ion-content padding>
   <ng-container *ngIf="examSchedule; else listEmpty">
     <ion-list>
-      <ion-item-sliding *ngFor="let item of examSchedule.examSchedule">
+      <ion-item-sliding #ItemSliding *ngFor="let item of examSchedule.examSchedule; let indexSchedule = index">
         <ion-item>
           <h2 class="item__exam">
-            <strong>Môn thi:</strong> {{item.class}}</h2>
+            <strong>Môn thi:</strong> {{item.class}}
+          </h2>
           <h2 class="item__exam">
-            <strong>Mã lớp:</strong> {{item.idClass}}</h2>
+            <strong>Mã lớp:</strong> {{item.idClass}}
+          </h2>
           <h2 class="item__exam">
-            <strong>STT:</strong> {{item.orderNumber}}</h2>
+            <strong>STT:</strong> {{item.orderNumber}}
+          </h2>
           <h2 class="item__exam">
-            <strong>Ngày thi:</strong> {{item.date}}</h2>
+            <strong>Ngày thi:</strong> {{item.date}}
+          </h2>
           <h2 class="item__exam">
-            <strong>Ca thi:</strong> {{item.shirt}} - ({{item.hours}})</h2>
+            <strong>Ca thi:</strong> {{item.shirt}} - ({{item.hours}})
+          </h2>
           <h2 class="item__exam">
-            <strong>Phòng thi:</strong> {{item.room}}</h2>
+            <strong>Phòng thi:</strong> {{item.room}}
+          </h2>
+          <!-- <ng-container *ngIf="listScheduleNoti">
+            <p>Or: {{item.idClass}}</p>
+            <ng-container *ngFor="let listItem of listScheduleNoti">
+              <p>{{listItem.data.idClass}}</p>
+             <ng-container *ngIf="item.idClass == listItem.data.idClass">
+               <p>{{listItem.title}}</p>
+             </ng-container>
+            </ng-container>
+          </ng-container> -->
         </ion-item>
         <ion-item-options side="left">
-          <button ion-button color="danger">
-            <ion-icon ios="ios-alarm" md="md-alarm"></ion-icon>
-            Đặt lịch
+          <button (click)="openRoomModal(item.idClass, item.room, examSchedule.idStudent)" ion-button color="secondary">
+            <ion-icon ios="ios-people" md="md-people"></ion-icon>
+            Danh sách phòng thi
           </button>
         </ion-item-options>
         <ion-item-options side="right">
-          <button (click)="openRoomModal(item.idClass, item.room, examSchedule.idStudent)" ion-button color="secondary">
-            <ion-icon ios="ios-people" md="md-people"></ion-icon>
-            Danh sách lớp
+          <button (click)="openDatePicker(item)" ion-button color="danger">
+            <ion-icon ios="ios-alarm" md="md-alarm"></ion-icon>
+            Thông báo
           </button>
         </ion-item-options>
       </ion-item-sliding>

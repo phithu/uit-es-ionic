@@ -1,11 +1,13 @@
-import { ExamSheduleService } from '../providers/exam-schedule';
-import { ExamSchedulePageModule } from './../pages/exam-schedule/exam-schedule.module';
-import { HttpModule } from '@angular/http';
+import { ExamSchedulePageModule } from './../pages/exam-schedule';
 // Core Angular - Ionic
 import { ErrorHandler, NgModule } from '@angular/core';
 import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
+
+// Ionic Native
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
+import { LocalNotifications } from '@ionic-native/local-notifications';
+import { DatePicker } from '@ionic-native/date-picker';
 
 // Module
 import { BrowserModule } from '@angular/platform-browser';
@@ -23,7 +25,6 @@ import { MyApp } from './app.component';
   ],
   imports: [
     BrowserModule,
-    HttpModule,
     HomePageModule,
     ExamSchedulePageModule,
     IonicModule.forRoot(MyApp, {
@@ -35,9 +36,10 @@ import { MyApp } from './app.component';
     MyApp
   ],
   providers: [
-    ExamSheduleService,
     StatusBar,
+    LocalNotifications,
     SplashScreen,
+    DatePicker,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })
