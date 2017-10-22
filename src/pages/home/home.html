@@ -10,7 +10,7 @@
 </ion-header>
 <ion-content scrollDownOnLoad="true">
   <div class="wrapper">
-    <form [formGroup]="frm" (ngSubmit)="openNewPage(frm.value.search)">
+    <form [formGroup]="frm" (ngSubmit)="openExamSchedulePage(frm.value.search)">
       <ion-searchbar type="number" placeholder="Mã số sinh viên..." formControlName="search" [showCancelButton]="shouldShowCancel">
       </ion-searchbar>
       <alert-error *ngIf="formErrors.search" [message]="formErrors.search"></alert-error>
