@@ -35,11 +35,9 @@
             <strong>Phòng thi:</strong> {{item.room}}
           </h2>
           <!-- <ng-container *ngIf="listScheduleNoti">
-            <p>Or: {{item.idClass}}</p>
             <ng-container *ngFor="let listItem of listScheduleNoti">
-              <p>{{listItem.data.idClass}}</p>
-             <ng-container *ngIf="item.idClass == listItem.data.idClass">
-               <p>{{listItem.title}}</p>
+             <ng-container *ngIf="item.idClass == listItem.data">
+               <p>Thông báo: {{listItem.title}}</p>
              </ng-container>
             </ng-container>
           </ng-container> -->

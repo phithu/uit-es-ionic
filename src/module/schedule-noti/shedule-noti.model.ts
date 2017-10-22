@@ -5,6 +5,6 @@ export interface ScheduleNotiModel {
     icon?: string,
     text: string,
     title?: string,
-    data?: any,
+    data: any,
     every?: string
 }

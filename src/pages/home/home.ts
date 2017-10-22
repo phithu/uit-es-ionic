@@ -1,12 +1,20 @@
 import { ExamSchedulePage } from './../exam-schedule/exam-schedule';
-import { NavController, ToastController } from 'ionic-angular';
+import {
+  NavController,
+  ToastController
+} from 'ionic-angular';
 import { FormBaseComponent } from './../../components/form-base/form-base';
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  FormGroup,
+  FormControl,
+  Validators
+} from '@angular/forms';
 import { CoreService } from '../../module/core-module';
-import { ScheduleNotiService, ScheduleNotiModel } from '../../module/schedule-noti';
-import { Subscription } from 'rxjs';
-
+import { ScheduleNotiService } from '../../module/schedule-noti';
 
 
 @Component({
@@ -38,8 +46,6 @@ export class HomePage extends FormBaseComponent implements OnInit {
     ])
   }
 
-  // public subscribeNotification: Subscription;
-
   constructor(
     private _coreService: CoreService,
     private _toastCtrl: ToastController,
@@ -47,6 +53,7 @@ export class HomePage extends FormBaseComponent implements OnInit {
     private _navCtrl: NavController) {
     super();
   }
+
   public ngOnInit() {
     super.ngOnInit();
     this.searchStudent();
@@ -59,18 +66,20 @@ export class HomePage extends FormBaseComponent implements OnInit {
   }
 
   public openExamSchedulePage(idStudent: string) {
+    // If idStudent is valid then open Exam Schedule Page
     if (this.frm.valid && idStudent.length === 8) {
       this._navCtrl.push(ExamSchedulePage, {
         idStudent: idStudent
-      }, { duration: 250 })
+      }, { duration: 250 }) // time duration: 250ms
     } else {
+      // Else dirty form  
       this.frm.markAsDirty();
     }
   }
 
   private searchStudent() {
     this.frm.get('search').valueChanges
-      .debounceTime(250)
+      .debounceTime(500)
       .distinctUntilChanged()
       .subscribe((idStudent: string) => {
         if (idStudent.length === 8 && this.frm.valid) {
@@ -87,6 +96,7 @@ export class HomePage extends FormBaseComponent implements OnInit {
           this.listLogs = response.data;
         }
       }, (err) => {
+        // Show error
         let msg = 'Rất tiếc! Hiện tại không thể lấy dữ liệu. Vui lòng kiểm tra lại kết nối Internet và thử lại.';
         this.showToast(msg);
       });
@@ -99,6 +109,7 @@ export class HomePage extends FormBaseComponent implements OnInit {
         duration: 20000,
         showCloseButton: true
       })
+      // Show toast
       .present()
   }
 
