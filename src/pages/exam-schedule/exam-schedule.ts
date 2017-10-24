@@ -74,7 +74,7 @@ export class ExamSchedulePage {
     roomModal.present();
   }
 
-  public openDatePicker(item: any) {
+  public openDatePicker(item: any, indexSchedule: number) {
 
     // config DatePicker
     let dateMax = this.dateMax(item.date, item.hours);
@@ -90,35 +90,13 @@ export class ExamSchedulePage {
     this._datePicker.show(option).then(
       (date) => {
         let shedule: ScheduleNotiModel = {
-          id: item.orderNumber,
+          id: indexSchedule,
           data: item.idClass,
           title: `Thi môn: ${item.class}`,
           at: new Date(moment(date).format()).valueOf(),
           text: `Phòng thi: ${item.room} - Giờ thi: ${item.hours} - STT: ${item.orderNumber}`
         }
-        // this.listScheduleNoti.push(shedule);
-        // console.log(this.listScheduleNoti);
         this._scheduleNotiService.addSchedule(shedule);
-        // console.log(shedule);
-        // if (this._scheduleNotiService.listSchedules.length > 0) {
-        //   this._scheduleNotiService.listSchedules.forEach((itemSchedule) => {
-        //     // console.log(item);
-        //     if (itemSchedule.data === shedule.data) {
-        //       itemSchedule.at = shedule.at;
-        //     } else {
-        //       this._scheduleNotiService.addSchedule(shedule);
-        //     }
-        //   })
-        // } else {
-        //   this._scheduleNotiService.addSchedule(shedule);
-        // }
-        // console.log(shedule.data)
-        // Next schedule into ListSchedule Stream
-        //         this._scheduleNotiService.
-        //           listSchedules.forEach((item) => {
-        // console.log(item)
-        //           })
-
       },
       // Log errors
       (err) => console.log('Error occurred while getting date: ', err));
@@ -148,31 +126,40 @@ export class ExamSchedulePage {
               if (listSchedule.length > 1) {
                 this.updateShedule(listSchedule);
               }
-              // Implement schedule
-              this._localNotifications.schedule(listSchedule)
+              this.checkScheduleTime(listSchedule); // <-- Compare time's schedule with now
+              if(listSchedule.length > 0) {
+                this.listScheduleNoti = listSchedule;
+                this._localNotifications.schedule(listSchedule);   
+              }             
             }
           })
       }
     })
   }
 
-  private updateShedule(listSchedule: any) {
-    let length = listSchedule.length;
-    let itemLast = listSchedule[length - 1];
+  private checkScheduleTime(listSchedule: ScheduleNotiModel[]) {
     listSchedule.forEach((item) => {
-      if (item.title === itemLast.title) {
-        // Update time schedule
-        item.at = itemLast.at;
-        this._localNotifications.update(item)
-      }
-      // console.log(item);
-    })
-    listSchedule.pop(); // Delete last element
+      if(moment(item.at).isBefore(new Date(), 'hour')) {
+        let indexRemove = listSchedule.indexOf(item);
+        listSchedule.splice(indexRemove, 1); // <-- Remove item have schedule time < Now
+      }      
+    });
+  }
+
+  private updateShedule(listSchedule: ScheduleNotiModel[]) {
+    let length = listSchedule.length;
+    let itemLast = listSchedule[length - 1]; // <-- item last in array
+    let itemUpdate = listSchedule.find((value, index) => (value.title === itemLast.title && index !== (length - 1)));
+    if(itemUpdate) {
+      itemUpdate.at = itemLast.at; // <-- Update time
+      this._localNotifications.update(itemUpdate) // <-- Update notification
+      listSchedule.pop(); // <-- Delete last item
+    }
   }
 
   private getExamShedule() {
-    // Get idStudent from HomePage
-    this.idStudent = this._navParams.get('idStudent');
+   
+    this.idStudent = this._navParams.get('idStudent'); // <-- Get idStudent from HomePage
     if (this.idStudent) {
       this._coreService.getStudent(this.idStudent)
         .subscribe((response) => {
