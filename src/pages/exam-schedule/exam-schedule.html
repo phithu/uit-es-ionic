@@ -34,13 +34,14 @@
           <h2 class="item__exam">
             <strong>Phòng thi:</strong> {{item.room}}
           </h2>
-          <!-- <ng-container *ngIf="listScheduleNoti">
+          <ng-container *ngIf="listScheduleNoti">
             <ng-container *ngFor="let listItem of listScheduleNoti">
-             <ng-container *ngIf="item.idClass == listItem.data">
-               <p>Thông báo: {{listItem.title}}</p>
-             </ng-container>
+             <!-- <ng-container *ngIf="item.idClass == listItem.data">
+               <p>Thông báo: {{listItem.at | formattime}}</p>
+             </ng-container> -->
+             <p>HAHAH</p>
             </ng-container>
-          </ng-container> -->
+          </ng-container>
         </ion-item>
         <ion-item-options side="left">
           <button (click)="openRoomModal(item.idClass, item.room, examSchedule.idStudent)" ion-button color="secondary">
@@ -49,7 +50,7 @@
           </button>
         </ion-item-options>
         <ion-item-options side="right">
-          <button (click)="openDatePicker(item)" ion-button color="danger">
+          <button (click)="openDatePicker(item, indexSchedule)" ion-button color="danger">
             <ion-icon ios="ios-alarm" md="md-alarm"></ion-icon>
             Thông báo
           </button>

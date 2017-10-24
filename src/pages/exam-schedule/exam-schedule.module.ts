@@ -7,6 +7,7 @@ import { NotFoundModule } from '../../components/not-found';
 import { AlertErrorModule } from '../../components/alert-error';
 import { CoreModule } from '../../module/core-module';
 import { ScheduleNotiModule } from '../../module/schedule-noti';
+import { PipesModule } from '../../pipes';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { ScheduleNotiModule } from '../../module/schedule-noti';
     LoadingModule,
     NotFoundModule,
     AlertErrorModule,
+    PipesModule,
     IonicPageModule.forChild(ExamSchedulePage),
   ],
   entryComponents: [
