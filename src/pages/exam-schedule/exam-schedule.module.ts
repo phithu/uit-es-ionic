@@ -6,7 +6,7 @@ import { LoadingModule } from '../../components/loading';
 import { NotFoundModule } from '../../components/not-found';
 import { AlertErrorModule } from '../../components/alert-error';
 import { CoreModule } from '../../module/core-module';
-import { ScheduleNotiModule } from '../../module/schedule-noti';
+import { ScheduleModule } from '../../module/schedule-module';
 import { PipesModule } from '../../pipes';
 
 @NgModule({
@@ -16,7 +16,7 @@ import { PipesModule } from '../../pipes';
   imports: [
     CoreModule,
     RoomModalModule,
-    ScheduleNotiModule,
+    ScheduleModule,
     LoadingModule,
     NotFoundModule,
     AlertErrorModule,

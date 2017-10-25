@@ -14,7 +14,7 @@ import {
   Validators
 } from '@angular/forms';
 import { CoreService } from '../../module/core-module';
-import { ScheduleNotiService } from '../../module/schedule-noti';
+
 
 
 @Component({
@@ -49,7 +49,6 @@ export class HomePage extends FormBaseComponent implements OnInit {
   constructor(
     private _coreService: CoreService,
     private _toastCtrl: ToastController,
-    private _scheduleNotiService: ScheduleNotiService,
     private _navCtrl: NavController) {
     super();
   }
@@ -84,7 +83,6 @@ export class HomePage extends FormBaseComponent implements OnInit {
       .subscribe((idStudent: string) => {
         if (idStudent.length === 8 && this.frm.valid) {
           this.openExamSchedulePage(idStudent);
-          this._scheduleNotiService.streamSchedules.next([]);
         }
       });
   }

@@ -1,4 +1,4 @@
-export interface ScheduleNotiModel {
+export interface ScheduleModel {
     id: any,
     sound?: string,
     at: number,

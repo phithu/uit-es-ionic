@@ -1,15 +1,20 @@
-.toolbar-title-ios {
-    & > div {
-        justify-content: center;
+page-exam-schedule {
+    .toolbar-title-ios {
+        & > div {
+            justify-content: center;
+        }
     }
-}
-.label-md {
-    padding-top: 5px;
-    margin: 15px 5px;
-}
-.item__exam {
-    margin: 4px 0px !important;
-}
-.item-md {
-    padding: 0px 10px;
+    .label-md {
+        padding-top: 5px;
+        margin: 15px 5px;
+    }
+    .item__exam {
+        margin: 4px 0px !important;
+    }
+    .item-md {
+        padding: 0px 10px;
+    }
+    .item-md .toggle-md {
+        padding: 8px;
+    }
 }

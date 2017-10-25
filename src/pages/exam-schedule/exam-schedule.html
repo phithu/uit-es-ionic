@@ -14,7 +14,7 @@
 <ion-content padding>
   <ng-container *ngIf="examSchedule; else listEmpty">
     <ion-list>
-      <ion-item-sliding #ItemSliding *ngFor="let item of examSchedule.examSchedule; let indexSchedule = index">
+      <ion-item-sliding #ItemSliding *ngFor="let item of examSchedule.examSchedule; let idSchedule = index">
         <ion-item>
           <h2 class="item__exam">
             <strong>Môn thi:</strong> {{item.class}}
@@ -34,12 +34,17 @@
           <h2 class="item__exam">
             <strong>Phòng thi:</strong> {{item.room}}
           </h2>
-          <ng-container *ngIf="listScheduleNoti">
-            <ng-container *ngFor="let listItem of listScheduleNoti">
-             <!-- <ng-container *ngIf="item.idClass == listItem.data">
-               <p>Thông báo: {{listItem.at | formattime}}</p>
-             </ng-container> -->
-             <p>HAHAH</p>
+          <ng-container *ngIf="listSchedule">
+            <ng-container *ngFor="let listItem of listSchedule">
+              <ng-container *ngIf="item.idClass == listItem.data">
+                <div class="flex flex_center__vertical space_between">
+                  <p class="flex flex_center__vertical">
+                    <ion-icon ios="ios-alarm" md="md-alarm"></ion-icon>
+                    <span class="mar_left_5">{{listItem.at | formattime}}</span>
+                  </p>
+                  <ion-toggle checked="true" (ionChange)="toggleChange($event.checked, listItem)"></ion-toggle>
+                </div>
+              </ng-container>
             </ng-container>
           </ng-container>
         </ion-item>
@@ -50,7 +55,7 @@
           </button>
         </ion-item-options>
         <ion-item-options side="right">
-          <button (click)="openDatePicker(item, indexSchedule)" ion-button color="danger">
+          <button (click)="openDatePicker(item, idSchedule)" ion-button color="danger">
             <ion-icon ios="ios-alarm" md="md-alarm"></ion-icon>
             Thông báo
           </button>
