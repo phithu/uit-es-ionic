@@ -14,7 +14,7 @@
 <ion-content padding>
   <ng-container *ngIf="examSchedule; else listEmpty">
     <ion-list>
-      <ion-item-sliding #ItemSliding *ngFor="let item of examSchedule.examSchedule; let idSchedule = index">
+      <ion-item-sliding [ngClass]="{'disable_item-list': compareTimeSchedule(item)}" #ItemSliding *ngFor="let item of examSchedule.examSchedule; let idSchedule = index">
         <ion-item>
           <h2 class="item__exam">
             <strong>Môn thi:</strong> {{item.class}}

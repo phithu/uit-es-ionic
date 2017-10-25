@@ -103,7 +103,7 @@ export class ExamSchedulePage {
     // Replace 'h' by space white and add string is ':00'
     let hourFormat = hour.replace('h', '') + ':00';
 
-    let dateFormat = this.convert_MMDDYYYY(date);
+    let dateFormat = this._scheduleService.convert_MMDDYYYY(date);
 
     return moment(dateFormat + ' ' + hourFormat).toDate();
   }
@@ -115,10 +115,25 @@ export class ExamSchedulePage {
 
   public toggleChange(checked: boolean, item: any) {
     if(!checked) {
-      this._localNotifications.cancel(item['id']); // <-- Cancal push notification by idSchedule
+      this._localNotifications.cancel(item['id']); // <-- Cancel push notification by idSchedule
     } else {
-      this._localNotifications.schedule(item); // <-- continue schedule
+      let itemSchedule = this._scheduleService.findScheduleById(item['id'], this.listSchedule);
+      this._localNotifications.schedule(itemSchedule); // <-- continue schedule
+      this._scheduleService.resetTimeSchedule(this.listSchedule); // <-- Reset time schedule notification;
     }
+  }
+
+  public compareTimeSchedule(item: any): boolean {
+
+   
+    // let timeSchedule = itemSchedule['at']; // <-- Get time's schedule
+    let listExamSchedule = this.examSchedule.examSchedule;
+    let scheduleTime = this.dateMax(item.date, item.hours);
+    let currentTime = new Date();
+    if(moment(scheduleTime).isBefore(currentTime, 'hour')) {
+      return true;
+    }
+    return false;
   }
 
   private scheduleNotification() {
@@ -170,10 +185,4 @@ export class ExamSchedulePage {
       .present();
   }
 
-  private convert_MMDDYYYY(date: string): string {
-    let days = date.substring(0, 2);
-    let month = date.substring(3, 5);
-    let year = date.substring(6, 10);
-    return `${month}-${days}-${year}`;
-  }
 }

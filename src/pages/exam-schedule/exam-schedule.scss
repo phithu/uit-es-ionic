@@ -17,4 +17,11 @@ page-exam-schedule {
     .item-md .toggle-md {
         padding: 8px;
     }
+    .disable_item-list {
+        pointer-events: none;
+        & .item-md, .item-block {
+            background: rgb(102, 102, 102);
+            text-decoration: line-through;
+        }
+    }
 }

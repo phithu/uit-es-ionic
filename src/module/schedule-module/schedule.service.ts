@@ -50,6 +50,19 @@ export class ScheduleService {
     }
   }
 
+  public findScheduleById(id: number, listSchedule: any[]) {
+    if(listSchedule.length > 0) {
+      return listSchedule.find((item) => item.id === id);
+    }
+  }
+
+  public convert_MMDDYYYY(date: string): string {
+    let days = date.substring(0, 2);
+    let month = date.substring(3, 5);
+    let year = date.substring(6, 10);
+    return `${month}-${days}-${year}`;
+  }
+
   private generateZeroNumber(number: number): string {
     let result = '';
     for (let i = 1; i <= number; i++) {
@@ -57,6 +70,5 @@ export class ScheduleService {
     }
     return result;
   }
-
-
+  
 }

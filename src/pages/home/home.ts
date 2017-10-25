@@ -14,6 +14,7 @@ import {
   Validators
 } from '@angular/forms';
 import { CoreService } from '../../module/core-module';
+import { ScheduleService } from '../../module/schedule-module';
 
 
 
@@ -49,6 +50,7 @@ export class HomePage extends FormBaseComponent implements OnInit {
   constructor(
     private _coreService: CoreService,
     private _toastCtrl: ToastController,
+    private _scheduleService: ScheduleService,
     private _navCtrl: NavController) {
     super();
   }
@@ -69,7 +71,7 @@ export class HomePage extends FormBaseComponent implements OnInit {
     if (this.frm.valid && idStudent.length === 8) {
       this._navCtrl.push(ExamSchedulePage, {
         idStudent: idStudent
-      }, { duration: 250 }) // time duration: 250ms
+      }, { duration: 250 }) // <-- time duration: 250ms
     } else {
       // Else dirty form  
       this.frm.markAsDirty();
@@ -83,6 +85,7 @@ export class HomePage extends FormBaseComponent implements OnInit {
       .subscribe((idStudent: string) => {
         if (idStudent.length === 8 && this.frm.valid) {
           this.openExamSchedulePage(idStudent);
+          this._scheduleService.addSchedule(null); // <-- Reset stream
         }
       });
   }
