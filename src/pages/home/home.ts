@@ -67,13 +67,12 @@ export class HomePage extends FormBaseComponent implements OnInit {
   }
 
   public openExamSchedulePage(idStudent: string) {
-    // If idStudent is valid then open Exam Schedule Page
-    if (this.frm.valid && idStudent.length === 8) {
+
+    if (this.frm.valid && idStudent.length === 8) { // <-- If idStudent is valid then open Exam Schedule Page
       this._navCtrl.push(ExamSchedulePage, {
         idStudent: idStudent
       }, { duration: 250 }) // <-- time duration: 250ms
-    } else {
-      // Else dirty form  
+    } else { // <-- dirty form
       this.frm.markAsDirty();
     }
   }
@@ -84,7 +83,7 @@ export class HomePage extends FormBaseComponent implements OnInit {
       .distinctUntilChanged()
       .subscribe((idStudent: string) => {
         if (idStudent.length === 8 && this.frm.valid) {
-          this.openExamSchedulePage(idStudent);
+          this.openExamSchedulePage(idStudent); // <-- Open Exam schedule Page and send idStudent params
           this._scheduleService.addSchedule(null); // <-- Reset stream
         }
       });
