@@ -51,7 +51,7 @@ export class ScheduleService {
   }
 
   public findScheduleById(id: number, listSchedule: any[]) {
-    if(listSchedule.length > 0) {
+    if (listSchedule.length > 0) {
       return listSchedule.find((item) => item.id === id);
     }
   }
@@ -63,6 +63,29 @@ export class ScheduleService {
     return `${month}-${days}-${year}`;
   }
 
+  public dateMax(date: string, hour: string): Date {
+
+    // Replace 'h' by space white and add string is ':00'
+    let hourFormat = hour.replace('h', '') + ':00';
+
+    let dateFormat = this.convert_MMDDYYYY(date);
+
+    return moment(dateFormat + ' ' + hourFormat).toDate();
+  }
+
+  public dateMin(date: string, hour: string): Date {
+    // date min = datemax - 7 days
+    return moment(this.dateMax(date, hour)).subtract(7, 'd').toDate();
+  }
+
+  public compareTimeToNow(time: any, granularity?: any): boolean {
+    let currentTime = new Date(); // <-- Current time
+    if(moment(time).isBefore(currentTime, granularity)) { // <-- Check scheduleTime < currentTime ?
+      return true; // <-- before
+    } 
+    return false; // <-- after
+  }
+
   private generateZeroNumber(number: number): string {
     let result = '';
     for (let i = 1; i <= number; i++) {
@@ -70,5 +93,5 @@ export class ScheduleService {
     }
     return result;
   }
-  
+
 }

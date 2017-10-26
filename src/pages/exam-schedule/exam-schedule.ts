@@ -38,6 +38,7 @@ export class ExamSchedulePage {
   public errorMsg: string;
   public listSchedule: any[] = [];
   public subscribeNotification: any;
+  // public isDisabledToggle: boolean;
 
 
 
@@ -62,7 +63,6 @@ export class ExamSchedulePage {
     if (this.subscribeNotification) {
       this.subscribeNotification.unsubscribe();
     }
-
     console.log('ionViewDidLeave');
   }
 
@@ -79,8 +79,8 @@ export class ExamSchedulePage {
   public openDatePicker(item: any, idSchedule: number) {
 
     // config DatePicker
-    let dateMax = this.dateMax(item.date, item.hours);
-    let dateMin = this.dateMin(item.date, item.hours);
+    let dateMax = this._scheduleService.dateMax(item.date, item.hours);
+    let dateMin = this._scheduleService.dateMin(item.date, item.hours);
     let platformAndroid = this._platform.is('android');
     let option: DatePickerOptions = {
       mode: 'datetime',
@@ -98,42 +98,23 @@ export class ExamSchedulePage {
       (err) => console.log('Error occurred while getting date: ', err));
   }
 
-  public dateMax(date: string, hour: string): Date {
-
-    // Replace 'h' by space white and add string is ':00'
-    let hourFormat = hour.replace('h', '') + ':00';
-
-    let dateFormat = this._scheduleService.convert_MMDDYYYY(date);
-
-    return moment(dateFormat + ' ' + hourFormat).toDate();
-  }
-
-  public dateMin(date: string, hour: string): Date {
-    // date min = datemax - 7 days
-    return moment(this.dateMax(date, hour)).subtract(7, 'd').toDate();
-  }
-
   public toggleChange(checked: boolean, item: any) {
-    if(!checked) {
+    if (!checked) {
       this._localNotifications.cancel(item['id']); // <-- Cancel push notification by idSchedule
     } else {
       let itemSchedule = this._scheduleService.findScheduleById(item['id'], this.listSchedule);
-      this._localNotifications.schedule(itemSchedule); // <-- continue schedule
-      this._scheduleService.resetTimeSchedule(this.listSchedule); // <-- Reset time schedule notification;
+      if (!this._scheduleService.compareTimeToNow(item.at, 'minute')) {
+        this._localNotifications.schedule(itemSchedule); // <-- continue schedule
+        this._scheduleService.resetTimeSchedule(this.listSchedule); // <-- Reset time schedule notification;  
+      }
     }
   }
 
   public compareTimeSchedule(item: any): boolean {
 
-   
-    // let timeSchedule = itemSchedule['at']; // <-- Get time's schedule
-    let listExamSchedule = this.examSchedule.examSchedule;
-    let scheduleTime = this.dateMax(item.date, item.hours);
-    let currentTime = new Date();
-    if(moment(scheduleTime).isBefore(currentTime, 'hour')) {
-      return true;
-    }
-    return false;
+    let listExamSchedule = this.examSchedule.examSchedule; // <-- Get list exam schedule
+    let scheduleTime = this._scheduleService.dateMax(item.date, item.hours); // <-- Date max in exam scheule
+    return this._scheduleService.compareTimeToNow(scheduleTime, 'hour');
   }
 
   private scheduleNotification() {
@@ -142,7 +123,7 @@ export class ExamSchedulePage {
       if (this._platform.is('android') || this._platform.is('ios')) {
         this._scheduleService.streamSchedules
           .subscribe((notication) => {
-            if(notication) { // <-- schedule !== undifined
+            if (notication) { // <-- schedule !== undifined
               const noticationMock = notication;
               this.listSchedule.push(noticationMock); // <-- Add schedule item into listSchedule array
               this._scheduleService.updateShedule(this.listSchedule);
@@ -170,7 +151,7 @@ export class ExamSchedulePage {
         // errror
         () => {
           let msg = 'Rất tiếc! Hiện tại không thể lấy dữ liệu. Vui lòng kiểm tra lại kết nối Internet và thử lại.';
-          this.showToast(msg);
+          this.showToast(msg); // <-- Show messages
         })
     }
   }
