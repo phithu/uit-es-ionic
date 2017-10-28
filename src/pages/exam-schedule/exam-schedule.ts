@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+
 import {
   IonicPage,
   NavParams,
@@ -9,18 +10,20 @@ import {
 
 import { RoomModalComponent } from '../room-modal';
 
-import * as moment from 'moment';
 import { CoreService } from '../../module/core-module';
-import { LocalNotifications } from '@ionic-native/local-notifications';
+
 import {
-  ScheduleService,
-  ScheduleModel
+  ScheduleService
 } from '../../module/schedule-module';
+
+import { LocalNotifications } from '@ionic-native/local-notifications';
+
 import {
   DatePicker,
   DatePickerOptions
 } from '@ionic-native/date-picker';
 
+import { ThemeableBrowser, ThemeableBrowserOptions } from '@ionic-native/themeable-browser';
 
 @IonicPage({
   priority: 'off'
@@ -36,13 +39,12 @@ export class ExamSchedulePage {
   public idStudent: string;
   public examSchedule: any;
   public errorMsg: string;
-  public listSchedule: any[] = [];
+  public listSchedule: any[];
   public subscribeNotification: any;
-  // public isDisabledToggle: boolean;
-
-
+  public listInfoUpdate: any[];
 
   constructor(
+    private _themeableBrowser: ThemeableBrowser,
     private _navParams: NavParams,
     private _coreService: CoreService,
     private _scheduleService: ScheduleService,
@@ -55,7 +57,9 @@ export class ExamSchedulePage {
 
   public ionViewDidLoad() {
     this.getExamShedule();
+    this.getInfoUpdate();
     this.scheduleNotification();
+
   }
 
   // Did leave page
@@ -63,7 +67,25 @@ export class ExamSchedulePage {
     if (this.subscribeNotification) {
       this.subscribeNotification.unsubscribe();
     }
-    console.log('ionViewDidLeave');
+  }
+
+  public openURL(link: string) {
+    const options: ThemeableBrowserOptions = {
+      statusbar: {
+        color: '#00675bFF'
+      },
+      toolbar: {
+        height: 44,
+        color: '#009688FF'
+      },
+      title: {
+        color: '#ffffffff',
+        showPageTitle: true
+      },     
+      backButtonCanClose: true
+    };
+    this._themeableBrowser.create(link, '_blank',options);
+
   }
 
   public openRoomModal(idClass: string, room: string, idStudent: string) {
@@ -112,12 +134,12 @@ export class ExamSchedulePage {
 
   public compareTimeSchedule(item: any): boolean {
 
-    let listExamSchedule = this.examSchedule.examSchedule; // <-- Get list exam schedule
     let scheduleTime = this._scheduleService.dateMax(item.date, item.hours); // <-- Date max in exam scheule
     return this._scheduleService.compareTimeToNow(scheduleTime, 'hour');
   }
 
   private scheduleNotification() {
+    this.listSchedule = [];
     this._platform.ready().then(() => {
       // If platform is android or ios will push a notification
       if (this._platform.is('android') || this._platform.is('ios')) {
@@ -154,6 +176,15 @@ export class ExamSchedulePage {
           this.showToast(msg); // <-- Show messages
         })
     }
+  }
+
+  private getInfoUpdate() {
+    this._coreService.getInfoUpdate()
+      .subscribe((response: any) => {
+        if (response.result) {
+          this.listInfoUpdate = response.data;
+        }
+      })
   }
 
   private showToast(message: string) {

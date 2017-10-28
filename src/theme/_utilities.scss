@@ -29,6 +29,16 @@
 .mar_10_0 {
   margin: 10px inherit;
 }
+.non_padding {
+  padding: 0px;
+}
+.non_margin {
+  margin: 0px;
+}
+.non_pad_mar {
+  @extend .non_margin;
+  @extend .non_padding;
+}
 .disabled_boxShadow {
   box-shadow: initial !important;
 }

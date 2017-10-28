@@ -3,7 +3,7 @@
     <name>UIT-ES</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://10.45.94.16:8100" />
     <access origin="*" />
     <allow-navigation href="http://ionic.local/*" />
     <allow-intent href="http://*/*" />
@@ -103,4 +103,6 @@
     <plugin name="ionic-plugin-keyboard" spec="^2.2.1" />
     <plugin name="cordova-plugin-datepicker" spec="^0.9.3" />
     <plugin name="de.appplant.cordova.plugin.local-notification" spec="^0.8.5" />
+    <plugin name="cordova-plugin-themeablebrowser" spec="^0.2.17" />
+    <plugin name="cordova-plugin-inappbrowser" spec="^1.7.1" />
 </widget>

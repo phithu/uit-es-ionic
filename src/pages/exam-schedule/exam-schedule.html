@@ -12,6 +12,18 @@
   </ion-navbar>
 </ion-header>
 <ion-content padding>
+  <ion-card *ngIf="examSchedule && listInfoUpdate && listInfoUpdate.length > 0">
+    <ion-card-header>
+      Thông báo cập nhật lịch thi
+    </ion-card-header>
+    <ion-card-content class="non_padding">
+      <ion-list>
+        <ion-item (click)="openURL(item.link)" *ngFor="let item of listInfoUpdate" detail-push>
+          {{item.title}}
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
   <ng-container *ngIf="examSchedule; else listEmpty">
     <ion-list>
       <ion-item-sliding [ngClass]="{'disable_item-list': compareTimeSchedule(item)}" #ItemSliding *ngFor="let item of examSchedule.examSchedule; let idSchedule = index">
@@ -34,7 +46,7 @@
           <h2 class="item__exam">
             <strong>Phòng thi:</strong> {{item.room}}
           </h2>
-          <ng-container *ngIf="listSchedule">
+          <ng-container *ngIf="listSchedule && listSchedule.length > 0">
             <ng-container *ngFor="let listItem of listSchedule">
               <ng-container *ngIf="item.idClass == listItem.data">
                 <div class="flex flex_center__vertical space_between">
@@ -42,7 +54,7 @@
                     <ion-icon ios="ios-alarm" md="md-alarm"></ion-icon>
                     <span class="mar_left_5">{{listItem.at | formattime}}</span>
                   </p>
-                  <ion-toggle checked="true" (ionChange)="toggleChange($event.checked, listItem)"></ion-toggle>
+                  <ion-toggle checked="true"></ion-toggle>
                 </div>
               </ng-container>
             </ng-container>

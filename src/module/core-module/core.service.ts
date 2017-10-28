@@ -13,16 +13,26 @@ export class CoreService {
       .map((response) => response.json())
       .catch(this.handlerError)
   }
+
   public getStudent(idStudent: string): Observable<any> {
     return this.http.post(`${linkAPI}/student`, { idStudent: idStudent })
       .map((response) => response.json())
       .catch(this.handlerError)
   }
+
   public getRoom(idClass: string, room: string): Observable<any> {
     return this.http.post(`${linkAPI}/class`, { idClass: idClass, room: room })
       .map((response) => response.json())
       .catch(this.handlerError);
   }
+
+  public getInfoUpdate(): Observable<any> {
+    return this.http.get(`${linkAPI}/info-update`)
+    .map((response) => response.json())
+    .catch(this.handlerError)
+  }
+
+
   private handlerError(error) {
     return Observable.throw(error);
   }

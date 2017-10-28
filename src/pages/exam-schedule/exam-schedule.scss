@@ -24,4 +24,25 @@ page-exam-schedule {
             text-decoration: line-through;
         }
     }
+    .card-md {
+        margin: 0px;
+        margin-bottom: 20px !important;
+        width: 100%;
+    }
+    ion-card-header {
+        padding: 10px 0px;
+        font-size: 13pt;
+        text-decoration: underline;
+        text-align: center;
+    }
+    .card-content-md {
+        margin-bottom: 15px;
+       & .item-md {
+           min-height: 3.3rem;
+           & .label-md {
+               margin: 0px;
+               margin-bottom: 5px;
+           }
+       }
+    }
 }
