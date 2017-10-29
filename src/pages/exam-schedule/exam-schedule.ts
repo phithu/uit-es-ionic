@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { 
+  Component, 
+  ChangeDetectorRef
+} from '@angular/core';
 
 import {
   IonicPage,
@@ -48,6 +51,7 @@ export class ExamSchedulePage {
   public listInfoUpdate: any[];
 
   constructor(
+    private _changeDetector: ChangeDetectorRef,
     private _permissionService: PermissionService,
     private _themeableBrowser: ThemeableBrowser,
     private _navParams: NavParams,
@@ -66,7 +70,7 @@ export class ExamSchedulePage {
     this._localNotifications.clearAll().then(() => { // <-- Clear all notifications
       this.scheduleNotification();
     }).catch((err) => { console.log(err) });
-
+    this.removeTimeSchedule();
   }
 
   // Did leave page
@@ -101,7 +105,7 @@ export class ExamSchedulePage {
       mode: 'datetime',
       date: new Date(),
       maxDate: platformAndroid ? dateMax.valueOf() : dateMax,
-      minDate: platformAndroid ? dateMin.valueOf() : dateMin,
+      minDate: platformAndroid ? new Date().valueOf() : new Date(),
       androidTheme: 5
     }
     this._datePicker.show(option).then(
@@ -201,6 +205,20 @@ export class ExamSchedulePage {
           this._scheduleService.resetTimeSchedule(this.listSchedule) // <-- Reset time schedule notification;
         }
       })
+  }
+  private removeTimeSchedule() {
+    this._localNotifications.on('trigger', () => {
+      this._localNotifications.getTriggeredIds()
+      .then((listTriggeredId) => {
+        listTriggeredId.forEach((Id: number) => {
+          let result = this.listSchedule.find(item => item.id === Id); // <-- Find schedule by ID
+          if(result) {
+            this.listSchedule.splice(this.listSchedule.indexOf(result), 1); // <-- Remove schedule item in listSchedule
+            this._changeDetector.detectChanges(); // <-- Execute change detection to update view
+          }
+        })
+      })
+    })
   }
 
 }

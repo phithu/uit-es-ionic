@@ -26,7 +26,6 @@ export class ScheduleService {
       let itemUpdate = listSchedule.find((value, index) => (value.title === itemLast.title && index !== (length - 1)));
       if (itemUpdate) {
         itemUpdate.at = itemLast.at; // <-- Update time
-        // this._localNotifications.update(itemUpdate) // <-- Update notification
         listSchedule.pop(); // <-- Delete last item
       }
     }
@@ -64,8 +63,8 @@ export class ScheduleService {
 
   public dateMax(date: string, hour: string): Date {
 
-    // Replace 'h' by space white and add string is ':00'
-    let hourFormat = hour.replace('h', '') + ':00';
+    
+    let hourFormat = hour.replace('h', '') + ':00'; // <-- Replace 'h' by space white and add string is ':00'
 
     let dateFormat = this.convert_MMDDYYYY(date);
 
