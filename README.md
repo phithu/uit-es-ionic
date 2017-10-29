@@ -8,6 +8,7 @@
 ![alt text](./screenshot/Screenshot_20171029-202815.png)
 ![alt text](./screenshot/Screenshot_20171029-202824.png)
 ![alt text](./screenshot/Screenshot_20171029-202845.png)
+![alt text](./screenshot/Screenshot_20171029-205112.png)
 
 # ReadMore and fixbug:
 https://github.com/katzer/cordova-plugin-local-notifications/issues/1325
