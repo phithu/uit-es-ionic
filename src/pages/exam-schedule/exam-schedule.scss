@@ -1,3 +1,8 @@
+.card-style {
+    margin: 0px;
+    margin-bottom: 20px !important;
+    width: 100%;
+}
 page-exam-schedule {
     .toolbar-title-ios {
         & > div {
@@ -25,9 +30,10 @@ page-exam-schedule {
         }
     }
     .card-md {
-        margin: 0px;
-        margin-bottom: 20px !important;
-        width: 100%;
+        @extend .card-style;
+    }
+    .card-ios {
+        @extend .card-style;
     }
     ion-card-header {
         padding: 10px 0px;
