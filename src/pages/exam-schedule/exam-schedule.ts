@@ -67,9 +67,11 @@ export class ExamSchedulePage {
   public ionViewDidLoad() {
     this.getExamShedule();
     this.getInfoUpdate();
-    this._localNotifications.clearAll().then(() => { // <-- Clear all notifications
+    this._localNotifications.clearAll()
+    .then(() => { // <-- Clear all notifications
       this.scheduleNotification();
-    }).catch((err) => { console.log(err) });
+    })
+    .catch((err) => { console.log(err) });
     this.removeTimeSchedule();
   }
 
@@ -118,7 +120,12 @@ export class ExamSchedulePage {
 
   public toggleChange(checked: boolean, item: any) {
     if (!checked) {
-      this._localNotifications.cancel(item['id']); // <-- Cancel push notification by idSchedule
+      this._localNotifications.cancel(item['id']) // <-- Cancel push notification by idSchedule
+      .then((value) => {
+        console.log('value', value);
+      }, (err) => {
+        console.log('err: ', err);
+      }); 
     } else {
       let itemSchedule = this._scheduleService.findScheduleById(item['id'], this.listSchedule);
       if (!this._scheduleService.compareTimeToNow(item.at, 'minute')) {

@@ -54,7 +54,7 @@
                     <ion-icon ios="ios-alarm" md="md-alarm"></ion-icon>
                     <span class="mar_left_5">{{listItem.at | formattime}}</span>
                   </p>
-                  <ion-toggle checked="true"></ion-toggle>
+                  <ion-toggle (ionChange)="toggleChange($event.checked, listItem)" checked="true"></ion-toggle>
                 </div>
               </ng-container>
             </ng-container>
