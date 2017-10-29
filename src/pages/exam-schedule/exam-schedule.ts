@@ -23,7 +23,11 @@ import {
   DatePickerOptions
 } from '@ionic-native/date-picker';
 
-import { ThemeableBrowser, ThemeableBrowserOptions } from '@ionic-native/themeable-browser';
+import { ThemeableBrowser } from '@ionic-native/themeable-browser';
+
+import { PermissionService } from '../../module/permission-module';
+
+import { AppSetting } from '../../config';
 
 @IonicPage({
   priority: 'off'
@@ -44,6 +48,7 @@ export class ExamSchedulePage {
   public listInfoUpdate: any[];
 
   constructor(
+    private _permissionService: PermissionService,
     private _themeableBrowser: ThemeableBrowser,
     private _navParams: NavParams,
     private _coreService: CoreService,
@@ -58,7 +63,9 @@ export class ExamSchedulePage {
   public ionViewDidLoad() {
     this.getExamShedule();
     this.getInfoUpdate();
-    this.scheduleNotification();
+    this._localNotifications.clearAll().then(() => { // <-- Clear all notifications
+      this.scheduleNotification();
+    }).catch((err) => { console.log(err) });
 
   }
 
@@ -70,22 +77,8 @@ export class ExamSchedulePage {
   }
 
   public openURL(link: string) {
-    const options: ThemeableBrowserOptions = {
-      statusbar: {
-        color: '#00675bFF'
-      },
-      toolbar: {
-        height: 44,
-        color: '#009688FF'
-      },
-      title: {
-        color: '#ffffffff',
-        showPageTitle: true
-      },     
-      backButtonCanClose: true
-    };
-    this._themeableBrowser.create(link, '_blank',options);
 
+    this._themeableBrowser.create(link, '_blank', AppSetting.themeBrowser);
   }
 
   public openRoomModal(idClass: string, room: string, idStudent: string) {
@@ -141,18 +134,18 @@ export class ExamSchedulePage {
   private scheduleNotification() {
     this.listSchedule = [];
     this._platform.ready().then(() => {
-      // If platform is android or ios will push a notification
-      if (this._platform.is('android') || this._platform.is('ios')) {
-        this._scheduleService.streamSchedules
-          .subscribe((notication) => {
-            if (notication) { // <-- schedule !== undifined
-              const noticationMock = notication;
-              this.listSchedule.push(noticationMock); // <-- Add schedule item into listSchedule array
-              this._scheduleService.updateShedule(this.listSchedule);
-              this._localNotifications.schedule(notication); // <-- Push a notification 
-              this._scheduleService.resetTimeSchedule(this.listSchedule) // <-- Reset time schedule notification;
-            }
-          })
+      if (this._platform.is('android')) {
+        this._permissionService.permissionAvailable('WRITE_EXTERNAL_STORAGE',
+        () => { // <-- allow permission
+          this.pushNotification();
+        },
+        () => { // <-- not allow permission
+          console.log('Please register permission');
+        })
+      } else if (this._platform.is('ios')) {
+        this.pushNotification();
+      } else {
+        console.log('Local notification not support on your platform');
       }
     })
   }
@@ -195,6 +188,19 @@ export class ExamSchedulePage {
         showCloseButton: true
       })
       .present();
+  }
+
+  private pushNotification() {
+    this._scheduleService.streamSchedules
+      .subscribe((notication) => {
+        if (notication) { // <-- schedule !== undifined
+          const noticationMock = notication;
+          this.listSchedule.push(noticationMock); // <-- Add schedule item into listSchedule array
+          this._scheduleService.updateShedule(this.listSchedule);
+          this._localNotifications.schedule(notication); // <-- Push a notification 
+          this._scheduleService.resetTimeSchedule(this.listSchedule) // <-- Reset time schedule notification;
+        }
+      })
   }
 
 }

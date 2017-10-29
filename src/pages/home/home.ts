@@ -1,7 +1,8 @@
 import { ExamSchedulePage } from './../exam-schedule/exam-schedule';
 import {
   NavController,
-  ToastController
+  ToastController,
+  Platform
 } from 'ionic-angular';
 import { FormBaseComponent } from './../../components/form-base/form-base';
 import {
@@ -15,6 +16,7 @@ import {
 } from '@angular/forms';
 import { CoreService } from '../../module/core-module';
 import { ScheduleService } from '../../module/schedule-module';
+import { LocalNotifications } from '@ionic-native/local-notifications';
 
 
 
@@ -48,9 +50,11 @@ export class HomePage extends FormBaseComponent implements OnInit {
   }
 
   constructor(
+    private _platform: Platform,
     private _coreService: CoreService,
     private _toastCtrl: ToastController,
     private _scheduleService: ScheduleService,
+    private _localNotifications: LocalNotifications,
     private _navCtrl: NavController) {
     super();
   }
@@ -70,6 +74,7 @@ export class HomePage extends FormBaseComponent implements OnInit {
 
     if (this.frm.valid && idStudent.length === 8) { // <-- If idStudent is valid then open Exam Schedule Page
       this._scheduleService.addSchedule(null); // <-- Reset stream
+      this.cancelAllNotification(); // <-- Clear all notifications
       this._navCtrl.push(ExamSchedulePage, {
         idStudent: idStudent
       }, { duration: 250 }) // <-- time duration: 250ms
@@ -111,6 +116,15 @@ export class HomePage extends FormBaseComponent implements OnInit {
       })
       // Show toast
       .present()
+  }
+
+  private cancelAllNotification() {
+    this._platform.ready().then(() => {
+      // If platform is android or ios will cancel all notification
+      if (this._platform.is('android') || this._platform.is('ios')) {
+        this._localNotifications.cancelAll();
+      }
+    })
   }
 
 }

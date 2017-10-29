@@ -9,12 +9,14 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 import { DatePicker } from '@ionic-native/date-picker';
 import { ThemeableBrowser } from '@ionic-native/themeable-browser';
+
 // Module
 import { BrowserModule } from '@angular/platform-browser';
 import { HomePageModule } from '../pages/home';
 
 // Page
 import { MyApp } from './app.component';
+import { PermissionModule } from '../module/permission-module';
 
 //Service
 
@@ -27,6 +29,7 @@ import { MyApp } from './app.component';
     BrowserModule,
     HomePageModule,
     ExamSchedulePageModule,
+    PermissionModule,
     IonicModule.forRoot(MyApp, {
       preloadModules: true
     })
