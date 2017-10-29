@@ -99,7 +99,6 @@ export class ExamSchedulePage {
 
     // config DatePicker
     let dateMax = this._scheduleService.dateMax(item.date, item.hours);
-    let dateMin = this._scheduleService.dateMin(item.date, item.hours);
     let platformAndroid = this._platform.is('android');
     let option: DatePickerOptions = {
       mode: 'datetime',

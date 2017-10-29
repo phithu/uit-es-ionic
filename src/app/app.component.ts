@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-import { AndroidPermissions } from '@ionic-native/android-permissions';
 import { HomePage } from '../pages/home/home';
 import { PermissionService } from '../module/permission-module';
 import { AppSetting } from '../config'

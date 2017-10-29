@@ -8,7 +8,7 @@ import { AlertErrorModule } from '../../components/alert-error';
 import { CoreModule } from '../../module/core-module';
 import { ScheduleModule } from '../../module/schedule-module';
 import { PipesModule } from '../../pipes';
-import { PermissionModule } from '../../module/permission-module';
+
 
 @NgModule({
   declarations: [
