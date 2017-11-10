@@ -19,7 +19,6 @@ import { ScheduleService } from '../../module/schedule-module';
 import { LocalNotifications } from '@ionic-native/local-notifications';
 
 
-
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
@@ -48,6 +47,7 @@ export class HomePage extends FormBaseComponent implements OnInit {
       Validators.minLength(8)
     ])
   }
+  private isOpenPage: boolean;
 
   constructor(
     private _platform: Platform,
@@ -62,22 +62,27 @@ export class HomePage extends FormBaseComponent implements OnInit {
   public ngOnInit() {
     super.ngOnInit();
     this.searchStudent();
+    
   }
 
   // Will enter page
   public ionViewWillEnter() {
     this.getLogs();
+    this.isOpenPage = false;
 
   }
 
   public openExamSchedulePage(idStudent: string) {
 
+
     if (this.frm.valid && idStudent.length === 8) { // <-- If idStudent is valid then open Exam Schedule Page
       this._scheduleService.addSchedule(null); // <-- Reset stream
       this.cancelAllNotification(); // <-- Clear all notifications
-      this._navCtrl.push(ExamSchedulePage, {
-        idStudent: idStudent
-      }, { duration: 250 }) // <-- time duration: 250ms
+      
+      if(!this.isOpenPage) {
+        this.pushExamSchedulePage(idStudent);
+        this.isOpenPage = true;
+      }
     } else { // <-- dirty form
       this.frm.markAsDirty();
     }
@@ -127,4 +132,9 @@ export class HomePage extends FormBaseComponent implements OnInit {
     })
   }
 
+  private pushExamSchedulePage(idStudent: string) {
+    this._navCtrl.push(ExamSchedulePage, {
+      idStudent: idStudent
+    }, { duration: 250 })
+  }
 }
